@@ -1,0 +1,408 @@
+@import url('https://fonts.googleapis.com/css2?family=Galada:wght@400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow: auto;
+  overscroll-behavior-x: none;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-body: var(--font-body);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(0.9670 0.0028 264.6967);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    font-family: var(--font-body);
+    background-color: rgba(24,24,24,1);
+    color: rgba(180,180,180,1);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overscroll-behavior-x: none;
+  }
+}
+
+/* Broken Image Fallback Styles */
+img.broken-image-fallback {
+  position: relative;
+  display: inline-block;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  object-fit: none;
+  object-position: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.dark img.broken-image-fallback {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Figma Design Tokens */
+/**
+ * Design Tokens
+ * Generated from Figma variables and styles
+ * 
+ * Generated: 2026-07-26T21:26:23.158Z
+ */
+
+:root {
+  /* Spacing Scale */
+  --spacing-0: 0px;
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-14: 14px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-56: 56px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-112: 112px;
+  --spacing-128: 128px;
+
+}
+
+/* ── Dashed card border (repeating-gradient trick — works with border-radius) ── */
+/* Dash: 18px  Gap: 8px  Thickness: 1.5px  Colour: rgba(55,55,55,1) */
+.dashed-card {
+  --dash-color: rgba(55, 55, 55, 1);
+  --dash-len: 18px;
+  --gap-len: 8px;
+  --thickness: 1.5px;
+  background-image:
+    repeating-linear-gradient(90deg,  var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len))),
+    repeating-linear-gradient(180deg, var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len))),
+    repeating-linear-gradient(90deg,  var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len))),
+    repeating-linear-gradient(180deg, var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len)));
+  background-size:
+    calc(var(--dash-len) + var(--gap-len)) var(--thickness),
+    var(--thickness) calc(var(--dash-len) + var(--gap-len)),
+    calc(var(--dash-len) + var(--gap-len)) var(--thickness),
+    var(--thickness) calc(var(--dash-len) + var(--gap-len));
+  background-position: 0 0, 0 0, 0 100%, 100% 0;
+  background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
+}
+
+.dashed-card--clickable:hover {
+  --dash-color: rgba(95, 95, 95, 1);
+}
+
+/* ── Left-to-right text sweep highlight on card hover ── */
+/* Gradient: D9D9D9 occupies the left half, original muted colour the right half.
+   background-size: 200% means the element always shows only half of it.
+   position 100% → right half visible (muted).  position 0% → left half visible (highlight).
+   Transitioning position sweeps the highlight from left to right. */
+.sweep-text {
+  /* 300% wide: [D9D9D9 solid | soft blend | rgba solid]
+     rest  → position 100% shows right third  (all rgba)
+     hover → position   0% shows left  third  (all D9D9D9)
+     mid-sweep the blend zone sweeps across, giving a feathered edge */
+  background: linear-gradient(
+    to right,
+    #D9D9D9              0%,
+    #D9D9D9              33%,
+    rgba(111,111,111,1)  66%,
+    rgba(111,111,111,1) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: background-position 0.8s ease;
+  display: inline;
+}
+
+.dashed-card:hover .sweep-text {
+  background-position: 0% 0;
+}
+
+/* Brighter variant for rgba(164,164,164) text → highlights to #EBEBEB,
+   keeping the visual hierarchy above the dimmer sweep-text (#D9D9D9) */
+.sweep-text-bright {
+  background: linear-gradient(
+    to right,
+    #EBEBEB              0%,
+    #EBEBEB              33%,
+    rgba(164,164,164,1)  66%,
+    rgba(164,164,164,1) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: background-position 0.8s ease;
+  display: inline;
+}
+
+.dashed-card:hover .sweep-text-bright {
+  background-position: 0% 0;
+}
+
+/* ── Per-card cascade delays: forward on hover, reversed on un-hover ── */
+
+/* Project cards (title → desc forward; desc → title reverse) */
+.card-project > span:nth-child(1) { transition-delay: 80ms; }
+.card-project > span:nth-child(2) { transition-delay: 0ms; }
+.dashed-card:hover .card-project > span:nth-child(1) { transition-delay: 0ms; }
+.dashed-card:hover .card-project > span:nth-child(2) { transition-delay: 80ms; }
+
+/* Achievement card */
+.card-achievement > span:nth-child(1) { transition-delay: 140ms; }
+.card-achievement > span:nth-child(2) { transition-delay: 70ms; }
+.card-achievement > span:nth-child(3) { transition-delay: 0ms; }
+.dashed-card:hover .card-achievement > span:nth-child(1) { transition-delay: 0ms; }
+.dashed-card:hover .card-achievement > span:nth-child(2) { transition-delay: 80ms; }
+.dashed-card:hover .card-achievement > span:nth-child(3) { transition-delay: 140ms; }
+
+/* Education card (2 sections × 3 lines) */
+.card-education > div:nth-child(1) > span:nth-child(1) { transition-delay: 310ms; }
+.card-education > div:nth-child(1) > span:nth-child(2) { transition-delay: 240ms; }
+.card-education > div:nth-child(1) > span:nth-child(3) { transition-delay: 190ms; }
+.card-education > div:nth-child(2) > span:nth-child(1) { transition-delay: 110ms; }
+.card-education > div:nth-child(2) > span:nth-child(2) { transition-delay: 45ms; }
+.card-education > div:nth-child(2) > span:nth-child(3) { transition-delay: 0ms; }
+.dashed-card:hover .card-education > div:nth-child(1) > span:nth-child(1) { transition-delay: 0ms; }
+.dashed-card:hover .card-education > div:nth-child(1) > span:nth-child(2) { transition-delay: 70ms; }
+.dashed-card:hover .card-education > div:nth-child(1) > span:nth-child(3) { transition-delay: 120ms; }
+.dashed-card:hover .card-education > div:nth-child(2) > span:nth-child(1) { transition-delay: 200ms; }
+.dashed-card:hover .card-education > div:nth-child(2) > span:nth-child(2) { transition-delay: 265ms; }
+.dashed-card:hover .card-education > div:nth-child(2) > span:nth-child(3) { transition-delay: 310ms; }
+
+/* Skills card (4 pairs: label/value) — pair index 0→3 forward, 3→0 reverse */
+.card-skills > div:nth-child(1) > span:nth-child(1) { transition-delay: 250ms; }
+.card-skills > div:nth-child(1) > span:nth-child(2) { transition-delay: 210ms; }
+.card-skills > div:nth-child(2) > span:nth-child(1) { transition-delay: 170ms; }
+.card-skills > div:nth-child(2) > span:nth-child(2) { transition-delay: 130ms; }
+.card-skills > div:nth-child(3) > span:nth-child(1) { transition-delay: 90ms; }
+.card-skills > div:nth-child(3) > span:nth-child(2) { transition-delay: 50ms; }
+.card-skills > div:nth-child(4) > span:nth-child(1) { transition-delay: 0ms; }
+.card-skills > div:nth-child(4) > span:nth-child(2) { transition-delay: 0ms; }
+.dashed-card:hover .card-skills > div:nth-child(1) > span:nth-child(1) { transition-delay: 0ms; }
+.dashed-card:hover .card-skills > div:nth-child(1) > span:nth-child(2) { transition-delay: 40ms; }
+.dashed-card:hover .card-skills > div:nth-child(2) > span:nth-child(1) { transition-delay: 70ms; }
+.dashed-card:hover .card-skills > div:nth-child(2) > span:nth-child(2) { transition-delay: 110ms; }
+.dashed-card:hover .card-skills > div:nth-child(3) > span:nth-child(1) { transition-delay: 140ms; }
+.dashed-card:hover .card-skills > div:nth-child(3) > span:nth-child(2) { transition-delay: 180ms; }
+.dashed-card:hover .card-skills > div:nth-child(4) > span:nth-child(1) { transition-delay: 210ms; }
+.dashed-card:hover .card-skills > div:nth-child(4) > span:nth-child(2) { transition-delay: 250ms; }
+
+/* ── Portrait orientation blocker ── */
+.portrait-blocker {
+  display: none;
+}
+
+/* Show only on touch devices (pointer: coarse) in portrait orientation.
+   This excludes desktop vertical monitors while catching all phones/tablets. */
+@media screen and (orientation: portrait) and (pointer: coarse) {
+  .portrait-blocker {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(18, 18, 18, 1);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+  .portrait-blocker__icon {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 8px;
+  }
+
+  .portrait-blocker__icon svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* arrowLeft asset rotated 180deg to point right */
+  .portrait-blocker__arrow {
+    width: 48px;
+    height: auto;
+    opacity: 0.6;
+    transform: rotate(180deg);
+  }
+
+  /* Libre Baskerville italic — matches tagline & about card text */
+  .portrait-blocker__title {
+    margin: 0;
+    color: rgba(164, 164, 164, 1);
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* Outfit — matches card description / label text */
+  .portrait-blocker__sub {
+    margin: 0;
+    color: rgba(74, 74, 74, 1);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.6;
+  }
+}
