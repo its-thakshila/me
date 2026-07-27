@@ -81,7 +81,11 @@ export const PersonalProfileCard = () => {
     const update = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      setScale(Math.min(w / 1440, h / 1024));
+      // The visual content doesn't fully span 1440x1024. 
+      // The tight bounding box is ~1320x930. 
+      // Using a tighter denominator scales the layout up more, consuming empty side space 
+      // and making text more readable on mobile landscape.
+      setScale(Math.min(w / 1320, h / 930));
       setViewportW(w);
       setViewportH(h);
     };
@@ -146,7 +150,8 @@ export const PersonalProfileCard = () => {
         display: 'flex', justifyContent: 'center', alignItems: 'center',
         zIndex: 1,
       }}>
-        <div style={{ flexShrink: 0, transform: `scale(${scale})`, transformOrigin: 'center center' }}>
+        {/* Scale the content and translate slightly so the actual content bounding box is perfectly centered */}
+        <div style={{ flexShrink: 0, transform: `scale(${scale}) translate(-8px, -2px)`, transformOrigin: 'center center' }}>
           <div style={{ width: 1440, height: 1024, position: 'relative' }}>
 
             {/* Spotlight overlay — expands to cover full viewport even inside the scaled canvas */}
@@ -156,8 +161,9 @@ export const PersonalProfileCard = () => {
               return (
                 <div style={{
                   position: 'absolute',
-                  left: -(ow - 1440) / 2,
-                  top: -(oh - 1024) / 2,
+                  // Reverse the translate(-8px, -2px) offset so the spotlight stays perfectly fixed to the viewport
+                  left: -(ow - 1440) / 2 + 8,
+                  top: -(oh - 1024) / 2 + 2,
                   width: ow,
                   height: oh,
                   zIndex: 50,

@@ -132,11 +132,13 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     font-family: var(--font-body);
-    background-color: rgba(24,24,24,1);
-    color: rgba(180,180,180,1);
+    background-color: rgba(24, 24, 24, 1);
+    color: rgba(180, 180, 180, 1);
   }
+
   h1,
   h2,
   h3,
@@ -145,6 +147,7 @@ body {
   h6 {
     font-family: var(--font-heading);
   }
+
   html,
   body,
   #root {
@@ -176,6 +179,7 @@ img.broken-image-fallback {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -223,9 +227,9 @@ img.broken-image-fallback {
   --gap-len: 8px;
   --thickness: 1.5px;
   background-image:
-    repeating-linear-gradient(90deg,  var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len))),
+    repeating-linear-gradient(90deg, var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len))),
     repeating-linear-gradient(180deg, var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len))),
-    repeating-linear-gradient(90deg,  var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len))),
+    repeating-linear-gradient(90deg, var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len))),
     repeating-linear-gradient(180deg, var(--dash-color) 0, var(--dash-color) var(--dash-len), transparent var(--dash-len), transparent calc(var(--dash-len) + var(--gap-len)));
   background-size:
     calc(var(--dash-len) + var(--gap-len)) var(--thickness),
@@ -250,13 +254,11 @@ img.broken-image-fallback {
      rest  → position 100% shows right third  (all rgba)
      hover → position   0% shows left  third  (all D9D9D9)
      mid-sweep the blend zone sweeps across, giving a feathered edge */
-  background: linear-gradient(
-    to right,
-    #D9D9D9              0%,
-    #D9D9D9              33%,
-    rgba(111,111,111,1)  66%,
-    rgba(111,111,111,1) 100%
-  );
+  background: linear-gradient(to right,
+      #D9D9D9 0%,
+      #D9D9D9 33%,
+      rgba(111, 111, 111, 1) 66%,
+      rgba(111, 111, 111, 1) 100%);
   background-size: 300% 100%;
   background-position: 100% 0;
   -webkit-background-clip: text;
@@ -273,13 +275,11 @@ img.broken-image-fallback {
 /* Brighter variant for rgba(164,164,164) text → highlights to #EBEBEB,
    keeping the visual hierarchy above the dimmer sweep-text (#D9D9D9) */
 .sweep-text-bright {
-  background: linear-gradient(
-    to right,
-    #EBEBEB              0%,
-    #EBEBEB              33%,
-    rgba(164,164,164,1)  66%,
-    rgba(164,164,164,1) 100%
-  );
+  background: linear-gradient(to right,
+      #EBEBEB 0%,
+      #EBEBEB 33%,
+      rgba(164, 164, 164, 1) 66%,
+      rgba(164, 164, 164, 1) 100%);
   background-size: 300% 100%;
   background-position: 100% 0;
   -webkit-background-clip: text;
@@ -296,50 +296,160 @@ img.broken-image-fallback {
 /* ── Per-card cascade delays: forward on hover, reversed on un-hover ── */
 
 /* Project cards (title → desc forward; desc → title reverse) */
-.card-project > span:nth-child(1) { transition-delay: 80ms; }
-.card-project > span:nth-child(2) { transition-delay: 0ms; }
-.dashed-card:hover .card-project > span:nth-child(1) { transition-delay: 0ms; }
-.dashed-card:hover .card-project > span:nth-child(2) { transition-delay: 80ms; }
+.card-project>span:nth-child(1) {
+  transition-delay: 80ms;
+}
+
+.card-project>span:nth-child(2) {
+  transition-delay: 0ms;
+}
+
+.dashed-card:hover .card-project>span:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.dashed-card:hover .card-project>span:nth-child(2) {
+  transition-delay: 80ms;
+}
 
 /* Achievement card */
-.card-achievement > span:nth-child(1) { transition-delay: 140ms; }
-.card-achievement > span:nth-child(2) { transition-delay: 70ms; }
-.card-achievement > span:nth-child(3) { transition-delay: 0ms; }
-.dashed-card:hover .card-achievement > span:nth-child(1) { transition-delay: 0ms; }
-.dashed-card:hover .card-achievement > span:nth-child(2) { transition-delay: 80ms; }
-.dashed-card:hover .card-achievement > span:nth-child(3) { transition-delay: 140ms; }
+.card-achievement>span:nth-child(1) {
+  transition-delay: 140ms;
+}
+
+.card-achievement>span:nth-child(2) {
+  transition-delay: 70ms;
+}
+
+.card-achievement>span:nth-child(3) {
+  transition-delay: 0ms;
+}
+
+.dashed-card:hover .card-achievement>span:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.dashed-card:hover .card-achievement>span:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.dashed-card:hover .card-achievement>span:nth-child(3) {
+  transition-delay: 140ms;
+}
 
 /* Education card (2 sections × 3 lines) */
-.card-education > div:nth-child(1) > span:nth-child(1) { transition-delay: 310ms; }
-.card-education > div:nth-child(1) > span:nth-child(2) { transition-delay: 240ms; }
-.card-education > div:nth-child(1) > span:nth-child(3) { transition-delay: 190ms; }
-.card-education > div:nth-child(2) > span:nth-child(1) { transition-delay: 110ms; }
-.card-education > div:nth-child(2) > span:nth-child(2) { transition-delay: 45ms; }
-.card-education > div:nth-child(2) > span:nth-child(3) { transition-delay: 0ms; }
-.dashed-card:hover .card-education > div:nth-child(1) > span:nth-child(1) { transition-delay: 0ms; }
-.dashed-card:hover .card-education > div:nth-child(1) > span:nth-child(2) { transition-delay: 70ms; }
-.dashed-card:hover .card-education > div:nth-child(1) > span:nth-child(3) { transition-delay: 120ms; }
-.dashed-card:hover .card-education > div:nth-child(2) > span:nth-child(1) { transition-delay: 200ms; }
-.dashed-card:hover .card-education > div:nth-child(2) > span:nth-child(2) { transition-delay: 265ms; }
-.dashed-card:hover .card-education > div:nth-child(2) > span:nth-child(3) { transition-delay: 310ms; }
+.card-education>div:nth-child(1)>span:nth-child(1) {
+  transition-delay: 310ms;
+}
+
+.card-education>div:nth-child(1)>span:nth-child(2) {
+  transition-delay: 240ms;
+}
+
+.card-education>div:nth-child(1)>span:nth-child(3) {
+  transition-delay: 190ms;
+}
+
+.card-education>div:nth-child(2)>span:nth-child(1) {
+  transition-delay: 110ms;
+}
+
+.card-education>div:nth-child(2)>span:nth-child(2) {
+  transition-delay: 45ms;
+}
+
+.card-education>div:nth-child(2)>span:nth-child(3) {
+  transition-delay: 0ms;
+}
+
+.dashed-card:hover .card-education>div:nth-child(1)>span:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.dashed-card:hover .card-education>div:nth-child(1)>span:nth-child(2) {
+  transition-delay: 70ms;
+}
+
+.dashed-card:hover .card-education>div:nth-child(1)>span:nth-child(3) {
+  transition-delay: 120ms;
+}
+
+.dashed-card:hover .card-education>div:nth-child(2)>span:nth-child(1) {
+  transition-delay: 200ms;
+}
+
+.dashed-card:hover .card-education>div:nth-child(2)>span:nth-child(2) {
+  transition-delay: 265ms;
+}
+
+.dashed-card:hover .card-education>div:nth-child(2)>span:nth-child(3) {
+  transition-delay: 310ms;
+}
 
 /* Skills card (4 pairs: label/value) — pair index 0→3 forward, 3→0 reverse */
-.card-skills > div:nth-child(1) > span:nth-child(1) { transition-delay: 250ms; }
-.card-skills > div:nth-child(1) > span:nth-child(2) { transition-delay: 210ms; }
-.card-skills > div:nth-child(2) > span:nth-child(1) { transition-delay: 170ms; }
-.card-skills > div:nth-child(2) > span:nth-child(2) { transition-delay: 130ms; }
-.card-skills > div:nth-child(3) > span:nth-child(1) { transition-delay: 90ms; }
-.card-skills > div:nth-child(3) > span:nth-child(2) { transition-delay: 50ms; }
-.card-skills > div:nth-child(4) > span:nth-child(1) { transition-delay: 0ms; }
-.card-skills > div:nth-child(4) > span:nth-child(2) { transition-delay: 0ms; }
-.dashed-card:hover .card-skills > div:nth-child(1) > span:nth-child(1) { transition-delay: 0ms; }
-.dashed-card:hover .card-skills > div:nth-child(1) > span:nth-child(2) { transition-delay: 40ms; }
-.dashed-card:hover .card-skills > div:nth-child(2) > span:nth-child(1) { transition-delay: 70ms; }
-.dashed-card:hover .card-skills > div:nth-child(2) > span:nth-child(2) { transition-delay: 110ms; }
-.dashed-card:hover .card-skills > div:nth-child(3) > span:nth-child(1) { transition-delay: 140ms; }
-.dashed-card:hover .card-skills > div:nth-child(3) > span:nth-child(2) { transition-delay: 180ms; }
-.dashed-card:hover .card-skills > div:nth-child(4) > span:nth-child(1) { transition-delay: 210ms; }
-.dashed-card:hover .card-skills > div:nth-child(4) > span:nth-child(2) { transition-delay: 250ms; }
+.card-skills>div:nth-child(1)>span:nth-child(1) {
+  transition-delay: 250ms;
+}
+
+.card-skills>div:nth-child(1)>span:nth-child(2) {
+  transition-delay: 210ms;
+}
+
+.card-skills>div:nth-child(2)>span:nth-child(1) {
+  transition-delay: 170ms;
+}
+
+.card-skills>div:nth-child(2)>span:nth-child(2) {
+  transition-delay: 130ms;
+}
+
+.card-skills>div:nth-child(3)>span:nth-child(1) {
+  transition-delay: 90ms;
+}
+
+.card-skills>div:nth-child(3)>span:nth-child(2) {
+  transition-delay: 50ms;
+}
+
+.card-skills>div:nth-child(4)>span:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.card-skills>div:nth-child(4)>span:nth-child(2) {
+  transition-delay: 0ms;
+}
+
+.dashed-card:hover .card-skills>div:nth-child(1)>span:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+.dashed-card:hover .card-skills>div:nth-child(1)>span:nth-child(2) {
+  transition-delay: 40ms;
+}
+
+.dashed-card:hover .card-skills>div:nth-child(2)>span:nth-child(1) {
+  transition-delay: 70ms;
+}
+
+.dashed-card:hover .card-skills>div:nth-child(2)>span:nth-child(2) {
+  transition-delay: 110ms;
+}
+
+.dashed-card:hover .card-skills>div:nth-child(3)>span:nth-child(1) {
+  transition-delay: 140ms;
+}
+
+.dashed-card:hover .card-skills>div:nth-child(3)>span:nth-child(2) {
+  transition-delay: 180ms;
+}
+
+.dashed-card:hover .card-skills>div:nth-child(4)>span:nth-child(1) {
+  transition-delay: 210ms;
+}
+
+.dashed-card:hover .card-skills>div:nth-child(4)>span:nth-child(2) {
+  transition-delay: 250ms;
+}
 
 /* ── Portrait orientation blocker ── */
 .portrait-blocker {
@@ -366,7 +476,7 @@ img.broken-image-fallback {
   .portrait-blocker__icon {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 10px;
     margin-bottom: 8px;
   }
 
