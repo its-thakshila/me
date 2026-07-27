@@ -110,16 +110,17 @@ export const PersonalProfileCard = () => {
       <div className="portrait-blocker">
         <div className="portrait-blocker__icon">
           {/* Portrait phone */}
-          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(74,74,74,1)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a4a4a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="5" y="2" width="14" height="20" rx="2" />
-            <circle cx="12" cy="17" r="1" fill="rgba(74,74,74,1)" stroke="none" />
+            <circle cx="12" cy="17" r="1" fill="#4a4a4a" stroke="none" />
           </svg>
-          {/* arrowLeft rotated 180° → points right, animated slide */}
-          <img src={arrowLeft} alt="" className="portrait-blocker__arrow" style={{ transform: 'rotate(180deg)' }} />
+          {/* arrowLeft rotated 180° → points right; filter tints the SVG asset to #4a4a4a */}
+          <img src={arrowLeft} alt="" className="portrait-blocker__arrow"
+            style={{ transform: 'rotate(180deg)', filter: 'brightness(0) saturate(100%) invert(26%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(96%) contrast(92%)' }} />
           {/* Landscape phone */}
-          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(97,97,97,1)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: 'rotate(90deg)' }}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4a4a4a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: 'rotate(90deg)' }}>
             <rect x="5" y="2" width="14" height="20" rx="2" />
-            <circle cx="12" cy="17" r="1" fill="rgba(97,97,97,1)" stroke="none" />
+            <circle cx="12" cy="17" r="1" fill="#4a4a4a" stroke="none" />
           </svg>
         </div>
         {/* Title: Libre Baskerville italic — matches the tagline/about cards */}
