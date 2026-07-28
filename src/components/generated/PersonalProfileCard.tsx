@@ -92,7 +92,7 @@ export const PersonalProfileCard = () => {
     { id: 'project2', cx: 1206, cy: 347, zoom: 1.2 },
     { id: 'project3', cx: 1144, cy: 497, zoom: 1.2 },
     { id: 'achievement', cx: 536, cy: 904, zoom: 1.2 },
-    { id: 'education', cx: 1190, cy: 720, zoom: 1.15 },
+    { id: 'education', cx: 1220, cy: 720, zoom: 1.15 },
     { id: 'social', cx: 1150, cy: 930, zoom: 1.15 },
   ];
   const gestureInProgress = React.useRef(false);
@@ -258,7 +258,7 @@ export const PersonalProfileCard = () => {
               </div>
             </Card>
 
-            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'education'} onHoverChange={onCardHover} style={{ width: 379, height: 280, left: 1000, top: 580, padding: '18px 21px' }}>
+            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'education'} onHoverChange={onCardHover} style={{ width: 440, height: 280, left: 1000, top: 580, padding: '18px 21px' }}>
               <Label>Education</Label>
               <div className="card-education">
                 <div style={{ marginBottom: 20 }}>
