@@ -98,12 +98,13 @@ export const PersonalProfileCard = () => {
   const mobileSections = [
     { id: 'hero', cx: 720, cy: 512, zoom: 1.0 },
     { id: 'about', cx: 250, cy: 376, zoom: 1.1 },
+    { id: 'tagline', cx: 355, cy: 177, zoom: 1.2 },
     { id: 'skills', cx: 271, cy: 727, zoom: 1.15 },
+    { id: 'project1', cx: 1114, cy: 207, zoom: 1.2 },
+    { id: 'project2', cx: 1176, cy: 337, zoom: 1.2 },
+    { id: 'project3', cx: 1120, cy: 487, zoom: 1.2 },
     { id: 'achievement', cx: 526, cy: 894, zoom: 1.2 },
     { id: 'education', cx: 1180, cy: 723, zoom: 1.15 },
-    { id: 'project3', cx: 1120, cy: 487, zoom: 1.2 },
-    { id: 'project2', cx: 1176, cy: 337, zoom: 1.2 },
-    { id: 'project1', cx: 1114, cy: 207, zoom: 1.2 },
   ];
   const gestureInProgress = React.useRef(false);
 
