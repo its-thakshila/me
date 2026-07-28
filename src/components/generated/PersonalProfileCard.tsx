@@ -92,7 +92,7 @@ export const PersonalProfileCard = () => {
     { id: 'project2', cx: 1206, cy: 347, zoom: 1.2 },
     { id: 'project3', cx: 1144, cy: 497, zoom: 1.2 },
     { id: 'achievement', cx: 536, cy: 904, zoom: 1.2 },
-    { id: 'education', cx: 1190, cy: 743, zoom: 1.15 },
+    { id: 'education', cx: 1190, cy: 720, zoom: 1.15 },
     { id: 'social', cx: 1150, cy: 930, zoom: 1.15 },
   ];
   const gestureInProgress = React.useRef(false);
@@ -258,18 +258,18 @@ export const PersonalProfileCard = () => {
               </div>
             </Card>
 
-            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'education'} onHoverChange={onCardHover} style={{ width: 379, height: 326, left: 1000, top: 580, padding: '18px 21px' }}>
+            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'education'} onHoverChange={onCardHover} style={{ width: 379, height: 280, left: 1000, top: 580, padding: '18px 21px' }}>
               <Label>Education</Label>
               <div className="card-education">
                 <div style={{ marginBottom: 20 }}>
                   <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 23, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px', display: 'block' }}>BSc (Hons) in Computer Engineering</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>University of Peradeniya (2023 - Present)</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>GPA - 3.88/4.00</span>
+                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>University of Peradeniya (2023 - Present)</span>
+                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>GPA - 3.88/4.00</span>
                 </div>
                 <div>
                   <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 23, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px', display: 'block' }}>G.C.E. Advanced Level</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Physical Science Stream (3As)</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Z-Score - 2.0124</span>
+                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Physical Science Stream (3As)</span>
+                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Z-Score - 2.0124</span>
                 </div>
               </div>
             </Card>
