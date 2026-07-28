@@ -331,6 +331,19 @@ export const PersonalProfileCard = () => {
             </div>
           </header>
         )}
+
+        {/* ── Mobile Footer ── */}
+        {isMobile && (
+          <footer style={{ 
+            position: 'absolute', left: 0, bottom: 0, width: '100%', height: 90, 
+            display: 'flex', alignItems: 'flex-end', justifyContent: 'center', 
+            paddingBottom: 14, boxSizing: 'border-box',
+            background: `linear-gradient(to top, ${isOverlayActive ? 'rgba(16,16,16,1)' : 'rgba(24,24,24,1)'} 0%, ${isOverlayActive ? 'rgba(16,16,16,0.85)' : 'rgba(24,24,24,0.85)'} 45%, ${isOverlayActive ? 'rgba(16,16,16,0)' : 'rgba(24,24,24,0)'} 100%)`,
+            zIndex: 100, pointerEvents: 'none' 
+          }}>
+            <span style={{ color: 'rgba(97,97,97,1)', fontSize: 13, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Open to Opportunities</span>
+          </footer>
+        )}
       </div>{/* /level-2 */}
     </div>
   );
