@@ -213,7 +213,7 @@ export const PersonalProfileCard = () => {
             <img src={profileImg} alt="Thakshila Bandara" style={{ width: 278, height: 278, position: 'absolute', left: 581, top: 400, objectFit: 'cover', borderRadius: 4 }} />
             <p style={{ width: 310, color: 'rgba(180,180,180,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: '29px', textAlign: 'center', position: 'absolute', left: 565, top: 680, whiteSpace: 'pre-line', margin: 0 }}>{'Embedded Systems Engineer\n& IoT Developer\nFounder @ Nodamic'}</p>
 
-            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'tagline'} onHoverChange={onCardHover} style={{ width: 367, height: 118, left: 171, top: 118, padding: '18px 21px', zIndex: 10 }}>
+            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'tagline'} onHoverChange={onCardHover} style={{ width: 367, height: 'max-content', left: 171, top: 118, padding: '18px 21px', zIndex: 10 }}>
               <p className="sweep-text" style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }}>I enjoy turning ideas into practical products</p>
             </Card>
 
