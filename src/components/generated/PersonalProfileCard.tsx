@@ -93,11 +93,18 @@ export const PersonalProfileCard = () => {
   // Mobile portrait: wheel + touch gesture-driven canvas panning (no page scroll)
   const isMobile = viewportW < 768 && viewportW < viewportH;
   const [mobileSection, setMobileSection] = useState(0);
+  // Each keyframe defines the canvas coordinate to center on (cx, cy) and the zoom level.
+  // You can adjust these values visually to perfect the framing of each card.
   const mobileSections = [
-    { cx: 720, cy: 512 }, // hero
-    { cx: 250, cy: 512 }, // about card
+    { id: 'hero', cx: 720, cy: 512, zoom: 1.0 },
+    { id: 'about', cx: 250, cy: 376, zoom: 1.1 },
+    { id: 'skills', cx: 271, cy: 727, zoom: 1.15 },
+    { id: 'achievement', cx: 526, cy: 894, zoom: 1.2 },
+    { id: 'education', cx: 1180, cy: 723, zoom: 1.15 },
+    { id: 'project3', cx: 1120, cy: 487, zoom: 1.2 },
+    { id: 'project2', cx: 1176, cy: 337, zoom: 1.2 },
+    { id: 'project1', cx: 1114, cy: 207, zoom: 1.2 },
   ];
-  const mobileScale = viewportH / 1024;
   const gestureInProgress = React.useRef(false);
 
   useEffect(() => {
@@ -145,8 +152,10 @@ export const PersonalProfileCard = () => {
   // Solid-line grid background — 2px lines, lighter colour
   const gridBg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='rgba(44,44,44,1)' stroke-width='2'/%3E%3C/svg%3E")`;
 
-  const mobileTx = viewportW / 2 - mobileSections[mobileSection].cx * mobileScale;
-  const mobileTy = viewportH / 2 - mobileSections[mobileSection].cy * mobileScale;
+  const activeSection = mobileSections[mobileSection];
+  const activeScale = (viewportH / 1024) * activeSection.zoom;
+  const mobileTx = viewportW / 2 - activeSection.cx * activeScale;
+  const mobileTy = viewportH / 2 - activeSection.cy * activeScale;
 
   return (
     <div style={isMobile ? {
@@ -164,7 +173,7 @@ export const PersonalProfileCard = () => {
         {/* Level 3 */}
         <div style={isMobile ? {
           position: 'absolute', transformOrigin: '0 0',
-          transform: `translate(${mobileTx}px, ${mobileTy}px) scale(${mobileScale})`,
+          transform: `translate(${mobileTx}px, ${mobileTy}px) scale(${activeScale})`,
           transition: 'transform 0.85s cubic-bezier(0.4, 0, 0.2, 1)', zIndex: 1,
         } : {
           flexShrink: 0, transform: `scale(${scale})`, transformOrigin: 'center center',
