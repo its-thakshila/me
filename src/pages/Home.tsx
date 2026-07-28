@@ -10,8 +10,8 @@ import { useViewportCamera } from '../hooks/useViewportCamera';
 // ==========================================
 export const MOBILE_SECTIONS = [
   { id: 'hero', cx: 720, cy: 512, zoom: 1.0 },
-  { id: 'tagline', cx: 354, cy: 177, zoom: 1.25 },
   { id: 'about', cx: 250, cy: 376, zoom: 1.2 },
+  { id: 'tagline', cx: 354, cy: 177, zoom: 1.25 },
   { id: 'skills', cx: 311, cy: 747, zoom: 1.15 },
   { id: 'project1', cx: 1144, cy: 217, zoom: 1.2 },
   { id: 'project2', cx: 1206, cy: 347, zoom: 1.2 },
