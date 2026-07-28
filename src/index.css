@@ -358,3 +358,18 @@ img.broken-image-fallback {
   transform: translateY(-4px) scale(1.01) translateZ(100px) !important;
   box-shadow: 0px 20px 50px rgba(0,0,0,0.95) !important;
 }
+
+.social-link {
+  color: rgba(97,97,97,1);
+  transition: color 1.5s ease-out;
+}
+@media (hover: hover) {
+  .social-link:hover {
+    color: rgba(180,180,180,1);
+    transition: color 0.2s;
+  }
+}
+.social-link:active {
+  color: rgba(180,180,180,1);
+  transition: color 0s;
+}
