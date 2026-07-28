@@ -43,6 +43,14 @@ export const PersonalProfileCard = () => {
   const [copied, setCopied] = useState(false);
   const [scale, setScale] = useState(1);
   const [cardHovered, setCardHovered] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    document.fonts.ready.then(() => {
+      // 400ms buffer to ensure stable paint before revealing
+      setTimeout(() => setIsLoading(false), 400);
+    });
+  }, []);
   // Debounce the overlay fade-out so card→card transitions don't cause a flicker
   const hoverOffTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const onCardHover = React.useCallback((hovered: boolean) => {
@@ -343,6 +351,18 @@ export const PersonalProfileCard = () => {
           </footer>
         )}
       </div>{/* /level-2 */}
+
+      {/* ── Loading Overlay ── */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        backgroundColor: 'rgba(24,24,24,0.9)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        zIndex: 9999,
+        opacity: isLoading ? 1 : 0,
+        pointerEvents: isLoading ? 'auto' : 'none',
+        transition: 'opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1)',
+      }} />
     </div>
   );
 };
