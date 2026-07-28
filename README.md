@@ -2,7 +2,7 @@
 
 An immersive, hardware-accelerated 3D canvas portfolio built with React and TypeScript, featuring a seamless swipe-to-scroll camera engine, dynamic depth-of-field overlays, and native-feeling gesture interactions.
 
-[**View Live Site (thakshila.me)**](https://thakshila.me) *(or replace with your actual URL)*
+[**View Live Site (thakshila.me)**](https://its-thakshila.github.io/me)
 
 ## 🚀 Technical Highlights
 
