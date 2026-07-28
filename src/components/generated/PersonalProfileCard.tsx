@@ -1,11 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import arrowRight from '../../assets/arrow-right.svg';
 import arrowLeft from '../../assets/arrow-left.svg';
 import arrowDown from '../../assets/arrow-down.svg';
 import profileImg from '../../assets/profile.png';
+import { useViewportCamera } from '../../hooks/useViewportCamera';
 
+// ==========================================
+// 1. DATA & CONFIGURATION
+// ==========================================
+export const MOBILE_SECTIONS = [
+  { id: 'hero', cx: 720, cy: 512, zoom: 1.0 },
+  { id: 'tagline', cx: 354, cy: 177, zoom: 1.25 },
+  { id: 'about', cx: 250, cy: 376, zoom: 1.2 },
+  { id: 'skills', cx: 311, cy: 747, zoom: 1.15 },
+  { id: 'project1', cx: 1144, cy: 217, zoom: 1.2 },
+  { id: 'project2', cx: 1206, cy: 347, zoom: 1.2 },
+  { id: 'project3', cx: 1144, cy: 497, zoom: 1.2 },
+  { id: 'achievement', cx: 536, cy: 904, zoom: 1.2 },
+  { id: 'education', cx: 1220, cy: 728, zoom: 1.15 },
+  { id: 'social', cx: 1150, cy: 930, zoom: 1.15 },
+];
+
+const SKILLS_DATA = [
+  { label: 'Embedded Systems', value: 'C/C++, Arduino, ESP32' },
+  { label: 'Protocols', value: 'CAN, MQTT, Wi-Fi, Bluetooth' },
+  { label: 'Tools and Platforms', value: 'PlatformIO, VS Code, Git' },
+  { label: 'Cloud and IoT', value: 'Firebase, Supabase' }
+];
+
+const PROJECTS_DATA = [
+  { id: 'project1', title: 'Node 1 - Smart Power Socket', desc: 'IoT Smart Socket with real-time monitoring, scheduling and alerts.', left: 919, top: 133 },
+  { id: 'project2', title: 'Drivora - ADAS', desc: 'Advanced Driver Assistance System for old vehicles.', left: 981, top: 263 },
+  { id: 'project3', title: 'MPSoC JPEG Encoder Pipeline', desc: 'Multi-processor JPEG encoder implemented on FPGA.', left: 919, top: 413 }
+];
+
+// ==========================================
+// 2. BASE UI COMPONENTS
+// ==========================================
 const Card = ({ children, isMobile, isFocused, onHoverChange, style, onClick }: { children: React.ReactNode; isMobile: boolean; isFocused: boolean; onHoverChange?: (hovered: boolean) => void; style?: React.CSSProperties; onClick?: () => void }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div
       onClick={onClick}
@@ -38,22 +71,32 @@ const Label = ({ children }: { children: React.ReactNode }) => (
   </span>
 );
 
+const SweepText = ({ text, bright, style, className = '' }: { text: string; bright?: boolean; style?: React.CSSProperties; className?: string }) => (
+  <span className={`${bright ? 'sweep-text-bright' : 'sweep-text'} ${className}`} style={{ display: 'block', ...style }}>
+    {text}
+  </span>
+);
+
+// ==========================================
+// 3. MAIN PORTFOLIO COMPONENT
+// ==========================================
 export const PersonalProfileCard = () => {
   const [time, setTime] = useState(new Date());
   const [copied, setCopied] = useState(false);
-  const [scale, setScale] = useState(1);
   const [cardHovered, setCardHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Hook handles viewport scaling and mobile swipe gestures
+  const { scale, viewportW, viewportH, isMobile, mobileSection } = useViewportCamera(MOBILE_SECTIONS.length);
+
+  // Wait for fonts to avoid FOUC
   useEffect(() => {
-    document.fonts.ready.then(() => {
-      // 400ms buffer to ensure stable paint before revealing
-      setTimeout(() => setIsLoading(false), 400);
-    });
+    document.fonts.ready.then(() => setTimeout(() => setIsLoading(false), 400));
   }, []);
-  // Debounce the overlay fade-out so card→card transitions don't cause a flicker
-  const hoverOffTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const onCardHover = React.useCallback((hovered: boolean) => {
+
+  // Debounced hover state for blur overlay
+  const hoverOffTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const onCardHover = useCallback((hovered: boolean) => {
     if (hovered) {
       if (hoverOffTimer.current) clearTimeout(hoverOffTimer.current);
       setCardHovered(true);
@@ -62,80 +105,11 @@ export const PersonalProfileCard = () => {
     }
   }, []);
 
+  // Real-time clock
   useEffect(() => {
     const t = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(t);
   }, []);
-
-  // Fit the 1440×1024 canvas into the visible viewport, track viewport size for overlay
-  const [viewportW, setViewportW] = useState(() => window.innerWidth);
-  const [viewportH, setViewportH] = useState(() => window.innerHeight);
-
-  useEffect(() => {
-    const update = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      setScale(Math.min(w / 1440, h / 1024));
-      setViewportW(w);
-      setViewportH(h);
-    };
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, []);
-
-  // Mobile portrait: wheel + touch gesture-driven canvas panning (no page scroll)
-  const isMobile = viewportW < 768 && viewportW < viewportH;
-  const [mobileSection, setMobileSection] = useState(0);
-  // Each keyframe defines the canvas coordinate to center on (cx, cy) and the zoom level.
-  // You can adjust these values visually to perfect the framing of each card.
-  const mobileSections = [
-    { id: 'hero', cx: 720, cy: 512, zoom: 1.0 },
-    { id: 'tagline', cx: 354, cy: 177, zoom: 1.25 },
-    { id: 'about', cx: 250, cy: 376, zoom: 1.2 },
-    { id: 'skills', cx: 311, cy: 747, zoom: 1.15 },
-    { id: 'project1', cx: 1144, cy: 217, zoom: 1.2 },
-    { id: 'project2', cx: 1206, cy: 347, zoom: 1.2 },
-    { id: 'project3', cx: 1144, cy: 497, zoom: 1.2 },
-    { id: 'achievement', cx: 536, cy: 904, zoom: 1.2 },
-    { id: 'education', cx: 1220, cy: 728, zoom: 1.15 },
-    { id: 'social', cx: 1150, cy: 930, zoom: 1.15 },
-  ];
-  const gestureInProgress = React.useRef(false);
-
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const changeSection = (dir: 1 | -1) => {
-      if (gestureInProgress.current) return;
-      gestureInProgress.current = true;
-      setMobileSection(s => (s + dir + mobileSections.length) % mobileSections.length);
-      setTimeout(() => { gestureInProgress.current = false; }, 600);
-    };
-
-    // Wheel (mouse / trackpad / desktop testing)
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      changeSection(e.deltaY > 0 ? 1 : -1);
-    };
-
-    // Touch swipe
-    let touchStartY = 0;
-    const handleTouchStart = (e: TouchEvent) => { touchStartY = e.touches[0].clientY; };
-    const handleTouchEnd = (e: TouchEvent) => {
-      const diff = touchStartY - e.changedTouches[0].clientY;
-      if (Math.abs(diff) > 40) changeSection(diff > 0 ? 1 : -1);
-    };
-
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleTouchEnd);
-    };
-  }, [isMobile, mobileSections.length]);
 
   const fmt = (d: Date) => d.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
@@ -145,14 +119,13 @@ export const PersonalProfileCard = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Solid-line grid background — 2px lines, lighter colour
-  const gridBg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='rgba(44,44,44,1)' stroke-width='2'/%3E%3C/svg%3E")`;
-
-  const activeSection = mobileSections[mobileSection];
+  const activeSection = MOBILE_SECTIONS[mobileSection];
   const activeScale = (viewportH / 1024) * activeSection.zoom;
   const mobileTx = viewportW / 2 - activeSection.cx * activeScale;
   const mobileTy = viewportH / 2 - activeSection.cy * activeScale;
   const isOverlayActive = cardHovered || (isMobile && activeSection.id !== 'hero');
+
+  const gridBg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='rgba(44,44,44,1)' stroke-width='2'/%3E%3C/svg%3E")`;
 
   return (
     <div style={isMobile ? {
@@ -160,12 +133,15 @@ export const PersonalProfileCard = () => {
     } : {
       width: '100vw', height: '100vh', backgroundColor: 'rgba(24,24,24,1)', position: 'relative', overflow: 'hidden',
     }}>
-      {/* Level 2 */}
+      
+      {/* ── Main Transform Layer ── */}
       <div style={isMobile ? {
         position: 'absolute', inset: 0, overflow: 'hidden', touchAction: 'none',
       } : {
         position: 'absolute', inset: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1,
       }}>
+        
+        {/* ── Grid Background ── */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)', WebkitMaskComposite: 'source-in', maskImage: 'linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)', maskComposite: 'intersect' } as React.CSSProperties}>
           <div style={isMobile ? {
             position: 'absolute', left: -4000, top: -4000, right: -4000, bottom: -4000,
@@ -174,11 +150,11 @@ export const PersonalProfileCard = () => {
             transform: `translate(${mobileTx}px, ${mobileTy}px) scale(${activeScale})`,
             transition: 'transform 0.85s cubic-bezier(0.4, 0, 0.2, 1)',
           } : {
-            position: 'absolute', inset: 0,
-            backgroundImage: gridBg, backgroundSize: '40px 40px',
+            position: 'absolute', inset: 0, backgroundImage: gridBg, backgroundSize: '40px 40px',
           }} />
         </div>
-        {/* Level 3 */}
+
+        {/* ── Scaled Canvas ── */}
         <div style={isMobile ? {
           position: 'absolute', transformOrigin: '0 0',
           transform: `translate(${mobileTx}px, ${mobileTy}px) scale(${activeScale})`,
@@ -186,9 +162,10 @@ export const PersonalProfileCard = () => {
         } : {
           flexShrink: 0, transform: `scale(${scale})`, transformOrigin: 'center center',
         }}>
-          {/* Level 4: 1440×1024 canvas */}
+          
           <div style={{ width: 1440, height: 1024, position: 'relative', transformStyle: 'preserve-3d' }}>
-
+            
+            {/* ── Glassmorphic Blur Overlay ── */}
             {(() => {
               const currentScale = isMobile ? activeScale : scale;
               const ow = Math.max(2440, viewportW / currentScale + 1000);
@@ -215,84 +192,79 @@ export const PersonalProfileCard = () => {
               </header>
             )}
 
+            {/* ── Hero Center ── */}
             <h1 style={{ width: 260, color: 'rgba(217,217,217,1)', fontSize: 64, fontFamily: '"Galada",cursive', fontWeight: 400, lineHeight: '68px', textAlign: 'center', position: 'absolute', left: 590, top: 275, margin: 0 }}>Thakshila<br />Bandara</h1>
             <img src={profileImg} alt="Thakshila Bandara" style={{ width: 278, height: 278, position: 'absolute', left: 581, top: 400, objectFit: 'cover', borderRadius: 4 }} />
             <p style={{ width: 310, color: 'rgba(180,180,180,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: '29px', textAlign: 'center', position: 'absolute', left: 565, top: 680, whiteSpace: 'pre-line', margin: 0 }}>{'Embedded Systems Engineer\n& IoT Developer\nFounder @ Nodamic'}</p>
 
+            {/* ── Tagline Card ── */}
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'tagline'} onHoverChange={onCardHover} style={{ width: 367, height: 'max-content', left: 171, top: 118, padding: '18px 21px', zIndex: 10 }}>
-              <p className="sweep-text" style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }}>I enjoy turning ideas into practical products</p>
+              <SweepText text="I enjoy turning ideas into practical products" style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }} />
             </Card>
 
+            {/* ── About Card ── */}
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'about'} onHoverChange={onCardHover} style={{ width: 358, height: 'max-content', left: 71, top: 212, padding: '22px 21px' }}>
               <Label>About</Label>
-              <p className="sweep-text" style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '42px', margin: 0 }}>I design and build embedded systems and IoT solutions that connect hardware, software and real world impact.</p>
+              <SweepText text="I design and build embedded systems and IoT solutions that connect hardware, software and real world impact." style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '42px', margin: 0 }} />
             </Card>
 
+            {/* ── Skills Card ── */}
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'skills'} onHoverChange={onCardHover} style={{ width: 320, height: 'max-content', left: 151, top: 558, padding: '18px 21px' }}>
               <Label>Skills</Label>
               <div className="card-skills">
-                {[{ label: 'Embedded Systems', value: 'C/C++, Arduino, ESP32' }, { label: 'Protocols', value: 'CAN, MQTT, Wi-Fi, Bluetooth' }, { label: 'Tools and Platforms', value: 'PlatformIO, VS Code, Git' }, { label: 'Cloud and IoT', value: 'Firebase, Supabase' }].map((s, i) => (
+                {SKILLS_DATA.map((s, i) => (
                   <div key={i} style={{ marginTop: i === 0 ? 4 : 14 }}>
-                    <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, display: 'block' }}>{s.label}</span>
-                    <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 600, display: 'block' }}>{s.value}</span>
+                    <SweepText text={s.label} style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700 }} />
+                    <SweepText bright text={s.value} style={{ color: 'rgba(164,164,164,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 600 }} />
                   </div>
                 ))}
               </div>
             </Card>
 
-            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'project1'} onHoverChange={onCardHover} style={{ width: 450, height: 'max-content', left: 919, top: 133, padding: '17px 21px' }}>
-              <Label>Project 1</Label>
-              <div className="card-project">
-                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 25, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '36px', display: 'block' }}>Node 1 - Smart Power Socket</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3, display: 'block' }}>IoT Smart Socket with real-time monitoring, scheduling and alerts.</span>
-              </div>
-            </Card>
+            {/* ── Project Cards ── */}
+            {PROJECTS_DATA.map((p) => (
+              <Card key={p.id} isMobile={isMobile} isFocused={isMobile && activeSection.id === p.id} onHoverChange={onCardHover} style={{ width: 450, height: 'max-content', left: p.left, top: p.top, padding: '17px 21px' }}>
+                <Label>{`Project ${p.id.replace('project', '')}`}</Label>
+                <div className="card-project">
+                  <SweepText bright text={p.title} style={{ color: 'rgba(164,164,164,1)', fontSize: 25, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '36px' }} />
+                  <SweepText text={p.desc} style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3 }} />
+                </div>
+              </Card>
+            ))}
 
-            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'project2'} onHoverChange={onCardHover} style={{ width: 450, height: 'max-content', left: 981, top: 263, padding: '17px 21px' }}>
-              <Label>Project 2</Label>
-              <div className="card-project">
-                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 25, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '36px', display: 'block' }}>Drivora - ADAS</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3, display: 'block' }}>Advanced Driver Assistance System for old vehicles.</span>
-              </div>
-            </Card>
-
-            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'project3'} onHoverChange={onCardHover} style={{ width: 450, height: 'max-content', left: 919, top: 413, padding: '17px 21px' }}>
-              <Label>Project 3</Label>
-              <div className="card-project">
-                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 25, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '36px', display: 'block' }}>MPSoC JPEG Encoder Pipeline</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3, display: 'block' }}>Multi-processor JPEG encoder implemented on FPGA.</span>
-              </div>
-            </Card>
-
+            {/* ── Education Card ── */}
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'education'} onHoverChange={onCardHover} style={{ width: 440, height: 'max-content', left: 1000, top: 580, padding: '18px 21px' }}>
               <Label>Education</Label>
               <div className="card-education">
                 <div style={{ marginBottom: 20 }}>
-                  <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 23, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px', display: 'block' }}>BSc (Hons) in Computer Engineering</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>University of Peradeniya (2023 - Present)</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>GPA - 3.88/4.00</span>
+                  <SweepText bright text="BSc (Hons) in Computer Engineering" style={{ color: 'rgba(164,164,164,1)', fontSize: 23, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px' }} />
+                  <SweepText text="University of Peradeniya (2023 - Present)" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
+                  <SweepText text="GPA - 3.88/4.00" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
                 </div>
                 <div>
-                  <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 23, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px', display: 'block' }}>G.C.E. Advanced Level</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Physical Science Stream (3As)</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Z-Score - 2.0124</span>
+                  <SweepText bright text="G.C.E. Advanced Level" style={{ color: 'rgba(164,164,164,1)', fontSize: 23, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px' }} />
+                  <SweepText text="Physical Science Stream (3As)" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
+                  <SweepText text="Z-Score - 2.0124" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
                 </div>
               </div>
             </Card>
 
+            {/* ── Achievement Card ── */}
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'achievement'} onHoverChange={onCardHover} style={{ width: 409, height: 'max-content', left: 331, top: 820, padding: '18px 21px' }}>
               <Label>Achievement</Label>
               <div className="card-achievement">
-                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 24, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px', display: 'block' }}>Champions - Game Fest 2026</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>8-Hour Game Dev Hackathon</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Organized by SLIIT Kandy Uni</span>
+                <SweepText bright text="Champions - Game Fest 2026" style={{ color: 'rgba(164,164,164,1)', fontSize: 24, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px' }} />
+                <SweepText text="8-Hour Game Dev Hackathon" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
+                <SweepText text="Organized by SLIIT Kandy Uni" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
               </div>
             </Card>
 
+            {/* ── Nav Arrows ── */}
             <img src={arrowRight} alt="" style={{ position: 'absolute', width: 82, left: 790, top: 172 }} />
             <img src={arrowLeft} alt="" style={{ position: 'absolute', width: 85, left: 488, top: 422 }} />
             <img src={arrowDown} alt="" style={{ position: 'absolute', width: 72, left: 786, top: 782 }} />
 
+            {/* ── Social Footer ── */}
             <div style={{
               position: 'absolute', left: 580, top: 912, width: 800, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 22,
               zIndex: (isMobile && activeSection.id === 'social') ? 100 : 'auto',
@@ -319,40 +291,39 @@ export const PersonalProfileCard = () => {
               </button>
             </div>
 
-          </div>{/* /canvas-1440 */}
-        </div>{/* /level-3 */}
+          </div>
+        </div>
         
-        {/* ── Mobile Header ── */}
+        {/* ── Mobile UI Overlay ── */}
         {isMobile && (
-          <header style={{ 
-            position: 'absolute', left: 0, top: 0, width: '100%', height: 90, 
-            display: 'flex', alignItems: 'flex-start', justifyContent: 'center', 
-            paddingTop: 14, boxSizing: 'border-box',
-            background: `linear-gradient(to bottom, ${isOverlayActive ? 'rgba(16,16,16,1)' : 'rgba(24,24,24,1)'} 0%, ${isOverlayActive ? 'rgba(16,16,16,0.85)' : 'rgba(24,24,24,0.85)'} 45%, ${isOverlayActive ? 'rgba(16,16,16,0)' : 'rgba(24,24,24,0)'} 100%)`,
-            zIndex: 100, pointerEvents: 'none' 
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 8, height: 8, backgroundColor: '#616161', borderRadius: '50%' }} />
-              <span style={{ color: 'rgba(97,97,97,1)', fontSize: 13, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
-            </div>
-          </header>
+          <>
+            <header style={{ 
+              position: 'absolute', left: 0, top: 0, width: '100%', height: 90, 
+              display: 'flex', alignItems: 'flex-start', justifyContent: 'center', 
+              paddingTop: 14, boxSizing: 'border-box',
+              background: `linear-gradient(to bottom, ${isOverlayActive ? 'rgba(16,16,16,1)' : 'rgba(24,24,24,1)'} 0%, ${isOverlayActive ? 'rgba(16,16,16,0.85)' : 'rgba(24,24,24,0.85)'} 45%, ${isOverlayActive ? 'rgba(16,16,16,0)' : 'rgba(24,24,24,0)'} 100%)`,
+              zIndex: 100, pointerEvents: 'none' 
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div style={{ width: 8, height: 8, backgroundColor: '#616161', borderRadius: '50%' }} />
+                <span style={{ color: 'rgba(97,97,97,1)', fontSize: 13, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
+              </div>
+            </header>
+            
+            <footer style={{ 
+              position: 'absolute', left: 0, bottom: 0, width: '100%', height: 90, 
+              display: 'flex', alignItems: 'flex-end', justifyContent: 'center', 
+              paddingBottom: 14, boxSizing: 'border-box',
+              background: `linear-gradient(to top, ${isOverlayActive ? 'rgba(16,16,16,1)' : 'rgba(24,24,24,1)'} 0%, ${isOverlayActive ? 'rgba(16,16,16,0.85)' : 'rgba(24,24,24,0.85)'} 45%, ${isOverlayActive ? 'rgba(16,16,16,0)' : 'rgba(24,24,24,0)'} 100%)`,
+              zIndex: 100, pointerEvents: 'none' 
+            }}>
+              <span style={{ color: 'rgba(97,97,97,1)', fontSize: 13, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Open to Opportunities</span>
+            </footer>
+          </>
         )}
+      </div>
 
-        {/* ── Mobile Footer ── */}
-        {isMobile && (
-          <footer style={{ 
-            position: 'absolute', left: 0, bottom: 0, width: '100%', height: 90, 
-            display: 'flex', alignItems: 'flex-end', justifyContent: 'center', 
-            paddingBottom: 14, boxSizing: 'border-box',
-            background: `linear-gradient(to top, ${isOverlayActive ? 'rgba(16,16,16,1)' : 'rgba(24,24,24,1)'} 0%, ${isOverlayActive ? 'rgba(16,16,16,0.85)' : 'rgba(24,24,24,0.85)'} 45%, ${isOverlayActive ? 'rgba(16,16,16,0)' : 'rgba(24,24,24,0)'} 100%)`,
-            zIndex: 100, pointerEvents: 'none' 
-          }}>
-            <span style={{ color: 'rgba(97,97,97,1)', fontSize: 13, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Open to Opportunities</span>
-          </footer>
-        )}
-      </div>{/* /level-2 */}
-
-      {/* ── Loading Overlay ── */}
+      {/* ── Boot Overlay ── */}
       <div style={{
         position: 'absolute', inset: 0,
         backgroundColor: 'rgba(24,24,24,0.9)',
