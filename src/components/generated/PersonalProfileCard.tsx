@@ -188,8 +188,8 @@ export const PersonalProfileCard = () => {
 
             {(() => { 
               const currentScale = isMobile ? activeScale : scale;
-              const ow = viewportW / currentScale; 
-              const oh = viewportH / currentScale; 
+              const ow = Math.max(1440, viewportW / currentScale); 
+              const oh = Math.max(1024, viewportH / currentScale); 
               return <div style={{ 
                 position: 'absolute', left: -(ow-1440)/2, top: -(oh-1024)/2, 
                 width: ow, height: oh, zIndex: 50, pointerEvents: 'none', 
