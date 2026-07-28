@@ -123,7 +123,7 @@ export const PersonalProfileCard = () => {
     const changeSection = (dir: 1 | -1) => {
       if (gestureInProgress.current) return;
       gestureInProgress.current = true;
-      setMobileSection(s => Math.max(0, Math.min(mobileSections.length - 1, s + dir)));
+      setMobileSection(s => (s + dir + mobileSections.length) % mobileSections.length);
       setTimeout(() => { gestureInProgress.current = false; }, 600);
     };
 
