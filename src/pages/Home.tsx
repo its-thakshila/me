@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import arrowRight from '../../assets/arrow-right.svg';
-import arrowLeft from '../../assets/arrow-left.svg';
-import arrowDown from '../../assets/arrow-down.svg';
-import profileImg from '../../assets/profile.png';
-import { useViewportCamera } from '../../hooks/useViewportCamera';
+import arrowRight from '../assets/arrow-right.svg';
+import arrowLeft from '../assets/arrow-left.svg';
+import arrowDown from '../assets/arrow-down.svg';
+import profileImg from '../assets/profile.png';
+import { useViewportCamera } from '../hooks/useViewportCamera';
 
 // ==========================================
 // 1. DATA & CONFIGURATION
@@ -80,7 +80,7 @@ const SweepText = ({ text, bright, style, className = '' }: { text: string; brig
 // ==========================================
 // 3. MAIN PORTFOLIO COMPONENT
 // ==========================================
-export const PersonalProfileCard = () => {
+export const Home = () => {
   const [time, setTime] = useState(new Date());
   const [copied, setCopied] = useState(false);
   const [cardHovered, setCardHovered] = useState(false);

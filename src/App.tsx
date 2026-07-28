@@ -1,7 +1,7 @@
-import { PersonalProfileCard } from './components/generated/PersonalProfileCard';
+import { Home } from './pages/Home';
 
 function App() {
-  return <PersonalProfileCard />;
+  return <Home />;
 }
 
 export default App;
