@@ -83,9 +83,9 @@ export const PersonalProfileCard = () => {
   // You can adjust these values visually to perfect the framing of each card.
   const mobileSections = [
     { id: 'hero', cx: 720, cy: 512, zoom: 1.0 },
-    { id: 'about', cx: 250, cy: 376, zoom: 1.1 },
-    { id: 'tagline', cx: 355, cy: 177, zoom: 1.2 },
-    { id: 'skills', cx: 271, cy: 747, zoom: 1.15 },
+    { id: 'tagline', cx: 354, cy: 177, zoom: 1.25 },
+    { id: 'about', cx: 250, cy: 376, zoom: 1.2 },
+    { id: 'skills', cx: 311, cy: 747, zoom: 1.15 },
     { id: 'project1', cx: 1144, cy: 217, zoom: 1.2 },
     { id: 'project2', cx: 1206, cy: 347, zoom: 1.2 },
     { id: 'project3', cx: 1144, cy: 497, zoom: 1.2 },
@@ -220,7 +220,7 @@ export const PersonalProfileCard = () => {
               <p className="sweep-text" style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '42px', margin: 0 }}>I design and build embedded systems and IoT solutions that connect hardware, software and real world impact.</p>
             </Card>
 
-            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'skills'} onHoverChange={onCardHover} style={{ width: 320, height: 'max-content', left: 111, top: 558, padding: '18px 21px' }}>
+            <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'skills'} onHoverChange={onCardHover} style={{ width: 320, height: 'max-content', left: 151, top: 558, padding: '18px 21px' }}>
               <Label>Skills</Label>
               <div className="card-skills">
                 {[{ label: 'Embedded Systems', value: 'C/C++, Arduino, ESP32' }, { label: 'Protocols', value: 'CAN, MQTT, Wi-Fi, Bluetooth' }, { label: 'Tools and Platforms', value: 'PlatformIO, VS Code, Git' }, { label: 'Cloud and IoT', value: 'Firebase, Supabase' }].map((s, i) => (
