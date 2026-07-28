@@ -35,7 +35,7 @@ const Card: React.FC<{
 );
 
 const Label = ({ children }: { children: React.ReactNode }) => (
-  <span style={{ color: 'rgba(74,74,74,1)', fontSize: 20, fontFamily: '"Outfit",sans-serif', fontWeight: 600, display: 'block', marginBottom: 5 }}>
+  <span style={{ color: 'rgba(74,74,74,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 600, display: 'block', marginBottom: 5 }}>
     {children}
   </span>
 );
@@ -219,16 +219,16 @@ export const PersonalProfileCard = () => {
 
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'about'} onHoverChange={onCardHover} style={{ width: 358, height: 328, left: 71, top: 212, padding: '22px 21px' }}>
               <Label>About</Label>
-              <p className="sweep-text" style={{ fontSize: 24, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }}>I design and build embedded systems and IoT solutions that connect hardware, software and real world impact.</p>
+              <p className="sweep-text" style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '42px', margin: 0 }}>I design and build embedded systems and IoT solutions that connect hardware, software and real world impact.</p>
             </Card>
 
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'skills'} onHoverChange={onCardHover} style={{ width: 320, height: 338, left: 111, top: 558, padding: '18px 21px' }}>
               <Label>Skills</Label>
               <div className="card-skills">
                 {[{ label: 'Embedded Systems', value: 'C/C++, Arduino, ESP32' }, { label: 'Protocols', value: 'CAN, MQTT, Wi-Fi, Bluetooth' }, { label: 'Tools and Platforms', value: 'PlatformIO, VS Code, Git' }, { label: 'Cloud and IoT', value: 'Firebase, Supabase' }].map((s, i) => (
-                  <div key={i} style={{ marginTop: i === 0 ? 4 : 13 }}>
-                    <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 15, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, display: 'block' }}>{s.label}</span>
-                    <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 600, display: 'block' }}>{s.value}</span>
+                  <div key={i} style={{ marginTop: i === 0 ? 4 : 14 }}>
+                    <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, display: 'block' }}>{s.label}</span>
+                    <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 600, display: 'block' }}>{s.value}</span>
                   </div>
                 ))}
               </div>
@@ -237,39 +237,39 @@ export const PersonalProfileCard = () => {
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'project1'} onHoverChange={onCardHover} style={{ width: 389, height: 148, left: 919, top: 133, padding: '17px 21px' }}>
               <Label>Project 1</Label>
               <div className="card-project">
-                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 21, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '32px', display: 'block' }}>Node 1 - Smart Power Socket</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3, display: 'block' }}>IoT Smart Socket with real-time monitoring, scheduling and alerts.</span>
+                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 25, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '36px', display: 'block' }}>Node 1 - Smart Power Socket</span>
+                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3, display: 'block' }}>IoT Smart Socket with real-time monitoring, scheduling and alerts.</span>
               </div>
             </Card>
 
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'project2'} onHoverChange={onCardHover} style={{ width: 389, height: 148, left: 981, top: 263, padding: '17px 21px' }}>
               <Label>Project 2</Label>
               <div className="card-project">
-                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 21, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '32px', display: 'block' }}>Drivora - ADAS</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3, display: 'block' }}>Advanced Driver Assistance System for old vehicles.</span>
+                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 25, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '36px', display: 'block' }}>Drivora - ADAS</span>
+                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3, display: 'block' }}>Advanced Driver Assistance System for old vehicles.</span>
               </div>
             </Card>
 
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'project3'} onHoverChange={onCardHover} style={{ width: 402, height: 148, left: 919, top: 413, padding: '17px 21px' }}>
               <Label>Project 3</Label>
               <div className="card-project">
-                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 21, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '32px', display: 'block' }}>MPSoC JPEG Encoder Pipeline</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3, display: 'block' }}>Multi-processor JPEG encoder implemented on FPGA.</span>
+                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 25, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '36px', display: 'block' }}>MPSoC JPEG Encoder Pipeline</span>
+                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3, display: 'block' }}>Multi-processor JPEG encoder implemented on FPGA.</span>
               </div>
             </Card>
 
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'education'} onHoverChange={onCardHover} style={{ width: 359, height: 286, left: 1000, top: 580, padding: '18px 21px' }}>
               <Label>Education</Label>
               <div className="card-education">
-                <div style={{ marginBottom: 18 }}>
-                  <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 21, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '32px', display: 'block' }}>BSc (Hons) in Computer Engineering</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 15, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>University of Peradeniya (2023 - Present)</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 15, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>GPA - 3.88/4.00</span>
+                <div style={{ marginBottom: 20 }}>
+                  <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 23, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px', display: 'block' }}>BSc (Hons) in Computer Engineering</span>
+                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>University of Peradeniya (2023 - Present)</span>
+                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>GPA - 3.88/4.00</span>
                 </div>
                 <div>
-                  <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 21, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '32px', display: 'block' }}>G.C.E. Advanced Level</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 15, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Physical Science Stream (3As)</span>
-                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 15, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Z-Score - 2.0124</span>
+                  <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 23, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px', display: 'block' }}>G.C.E. Advanced Level</span>
+                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Physical Science Stream (3As)</span>
+                  <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Z-Score - 2.0124</span>
                 </div>
               </div>
             </Card>
@@ -277,9 +277,9 @@ export const PersonalProfileCard = () => {
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'achievement'} onHoverChange={onCardHover} style={{ width: 389, height: 148, left: 331, top: 820, padding: '18px 21px' }}>
               <Label>Achievement</Label>
               <div className="card-achievement">
-                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 22, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, display: 'block' }}>Champions - Game Fest 2026</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>8-Hour Game Dev Hackathon</span>
-                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Organized by SLIIT Kandy Uni</span>
+                <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 24, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px', display: 'block' }}>Champions - Game Fest 2026</span>
+                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>8-Hour Game Dev Hackathon</span>
+                <span className="sweep-text" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, display: 'block' }}>Organized by SLIIT Kandy Uni</span>
               </div>
             </Card>
 
