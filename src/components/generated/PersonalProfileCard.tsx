@@ -218,14 +218,16 @@ export const PersonalProfileCard = () => {
               } as React.CSSProperties} />;
             })()}
 
-            {/* ── Header ── */}
-            <header style={{ position: 'absolute', left: 77, top: 59, width: 1286, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{ width: 10, height: 10, backgroundColor: '#616161', borderRadius: '50%' }} />
-                <span style={{ color: 'rgba(97,97,97,1)', fontSize: 18, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
-              </div>
-              <span style={{ color: 'rgba(97,97,97,1)', fontSize: 18, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Open to Opportunities</span>
-            </header>
+            {/* ── Desktop Header ── */}
+            {!isMobile && (
+              <header style={{ position: 'absolute', left: 77, top: 59, width: 1286, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 10, height: 10, backgroundColor: '#616161', borderRadius: '50%' }} />
+                  <span style={{ color: 'rgba(97,97,97,1)', fontSize: 18, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
+                </div>
+                <span style={{ color: 'rgba(97,97,97,1)', fontSize: 18, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Open to Opportunities</span>
+              </header>
+            )}
 
             <h1 style={{ width: 260, color: 'rgba(217,217,217,1)', fontSize: 64, fontFamily: '"Galada",cursive', fontWeight: 400, lineHeight: '68px', textAlign: 'center', position: 'absolute', left: 590, top: 275, margin: 0 }}>Thakshila<br />Bandara</h1>
             <img src={profileImg} alt="Thakshila Bandara" style={{ width: 278, height: 278, position: 'absolute', left: 581, top: 400, objectFit: 'cover', borderRadius: 4 }} />
@@ -333,6 +335,16 @@ export const PersonalProfileCard = () => {
 
           </div>{/* /canvas-1440 */}
         </div>{/* /level-3 */}
+        
+        {/* ── Mobile Header ── */}
+        {isMobile && (
+          <header style={{ position: 'absolute', left: 0, top: 40, width: '100%', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100, pointerEvents: 'none' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{ width: 10, height: 10, backgroundColor: '#616161', borderRadius: '50%' }} />
+              <span style={{ color: 'rgba(97,97,97,1)', fontSize: 16, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
+            </div>
+          </header>
+        )}
       </div>{/* /level-2 */}
     </div>
   );
