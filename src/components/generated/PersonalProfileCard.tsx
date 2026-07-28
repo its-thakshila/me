@@ -113,6 +113,7 @@ export const PersonalProfileCard = () => {
     { id: 'project3', cx: 1120, cy: 487, zoom: 1.2 },
     { id: 'achievement', cx: 526, cy: 894, zoom: 1.2 },
     { id: 'education', cx: 1180, cy: 723, zoom: 1.15 },
+    { id: 'social', cx: 1100, cy: 930, zoom: 1.15 },
   ];
   const gestureInProgress = React.useRef(false);
 
@@ -293,7 +294,14 @@ export const PersonalProfileCard = () => {
           <img src={arrowLeft} alt="" style={{ position: 'absolute', width: 85, left: 488, top: 422 }} />
           <img src={arrowDown} alt="" style={{ position: 'absolute', width: 72, left: 786, top: 782 }} />
 
-          <div style={{ position: 'absolute', left: 580, top: 912, width: 800, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 22 }}>
+          <div style={{ 
+            position: 'absolute', left: 580, top: 912, width: 800, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 22,
+            zIndex: (isMobile && activeSection.id === 'social') ? 100 : 'auto',
+            pointerEvents: (isMobile && activeSection.id !== 'social') ? 'none' : 'auto',
+            transform: (isMobile && activeSection.id === 'social') ? 'translateY(-4px) scale(1.01) translateZ(100px)' : 'translateZ(0px)',
+            transition: 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)',
+            willChange: 'transform, z-index',
+          }}>
             <a href="https://github.com/thakshilabandara" target="_blank" rel="noreferrer" title="GitHub" style={{ color: 'rgba(97,97,97,1)', transition: 'color 0.2s' }} onMouseEnter={e => (e.currentTarget.style.color = 'rgba(180,180,180,1)')} onMouseLeave={e => (e.currentTarget.style.color = 'rgba(97,97,97,1)')}>
               <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.652.242 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.807 5.625-5.48 5.92.43.37.814 1.102.814 2.222 0 1.606-.015 2.896-.015 3.286 0 .32.216.694.825.577C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z" /></svg>
             </a>
