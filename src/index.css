@@ -341,7 +341,19 @@ img.broken-image-fallback {
 .dashed-card:hover .card-skills > div:nth-child(3) > span:nth-child(2), .dashed-card.is-focused .card-skills > div:nth-child(3) > span:nth-child(2) { transition-delay: 180ms; }
 .dashed-card:hover .card-skills > div:nth-child(4) > span:nth-child(1), .dashed-card.is-focused .card-skills > div:nth-child(4) > span:nth-child(1) { transition-delay: 210ms; }
 .dashed-card:hover .card-skills > div:nth-child(4) > span:nth-child(2), .dashed-card.is-focused .card-skills > div:nth-child(4) > span:nth-child(2) { transition-delay: 250ms; }
-.dashed-card.is-focused {
+.dashed-card {
+  background-color: rgba(31,31,31,1);
+  box-shadow: 0px 4px 17.5px rgba(0,0,0,0.8);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateZ(0px);
+  will-change: transform, z-index;
+}
+.dashed-card--clickable {
+  cursor: pointer;
+}
+.dashed-card:hover, .dashed-card.is-focused {
   z-index: 100 !important;
   transform: translateY(-4px) scale(1.01) translateZ(100px) !important;
   box-shadow: 0px 20px 50px rgba(0,0,0,0.95) !important;

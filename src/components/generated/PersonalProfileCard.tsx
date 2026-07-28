@@ -16,38 +16,18 @@ const Card: React.FC<{
     onClick={onClick}
     className={`dashed-card${onClick ? ' dashed-card--clickable' : ''}${isFocused ? ' is-focused' : ''}`}
     style={{
-      backgroundColor: 'rgba(31,31,31,1)',
-      boxShadow: '0px 4px 17.5px rgba(0,0,0,0.8)',
-      borderRadius: '8px',
-      boxSizing: 'border-box',
-      transition: 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)',
-      cursor: onClick ? 'pointer' : 'default',
       position: 'absolute',
       pointerEvents: (isMobile && !isFocused) ? 'none' : 'auto',
       zIndex: isFocused ? 100 : (style?.zIndex || 'auto'),
-      transform: 'translateZ(0px)',
-      willChange: 'transform, z-index',
       ...style,
     }}
     onMouseEnter={e => {
       if (isMobile) return;
-      const el = e.currentTarget as HTMLDivElement;
-      el.dataset.hovered = '1';          // mark as currently hovered
-      el.style.zIndex = '100';
-      el.style.transform = 'translateY(-4px) scale(1.01)';
-      el.style.boxShadow = '0px 20px 50px rgba(0,0,0,0.95)';
       onHoverChange?.(true);
     }}
     onMouseLeave={e => {
       if (isMobile) return;
-      const el = e.currentTarget as HTMLDivElement;
-      delete el.dataset.hovered;         // unmark before the timer
-      el.style.transform = 'translateY(0) scale(1)';
-      el.style.boxShadow = '0px 4px 17.5px rgba(0,0,0,0.8)';
       onHoverChange?.(false);
-      // Only clear zIndex if the card hasn't been re-entered by the time
-      // the overlay finishes fading (350ms). Fixes the A→B→A rapid bug.
-      setTimeout(() => { if (!el.dataset.hovered) el.style.zIndex = ''; }, 350);
     }}
   >
     {children}
