@@ -150,18 +150,13 @@ export const PersonalProfileCard = () => {
 
   return (
     <div style={isMobile ? {
-      width: '100vw', height: '100vh', backgroundColor: 'rgba(24,24,24,1)', overflow: 'hidden', position: 'relative',
+      position: 'fixed', inset: 0, backgroundColor: 'rgba(24,24,24,1)', overflow: 'hidden', touchAction: 'none',
     } : {
       width: '100vw', height: '100vh', backgroundColor: 'rgba(24,24,24,1)', position: 'relative', overflow: 'hidden',
     }}>
-      {isMobile && (
-        <div style={{ position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)', zIndex: 200, display: 'flex', gap: 10, pointerEvents: 'none' }}>
-          {mobileSections.map((_, i) => <div key={i} style={{ width: 7, height: 7, borderRadius: '50%', transition: 'background-color 0.4s ease', backgroundColor: i === mobileSection ? 'rgba(217,217,217,0.85)' : 'rgba(97,97,97,0.4)' }} />)}
-        </div>
-      )}
       {/* Level 2 */}
       <div style={isMobile ? {
-        position: 'absolute', inset: 0, overflow: 'hidden',
+        position: 'absolute', inset: 0, overflow: 'hidden', touchAction: 'none',
       } : {
         position: 'absolute', inset: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1,
       }}>
