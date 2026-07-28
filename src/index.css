@@ -361,15 +361,19 @@ img.broken-image-fallback {
 
 .social-link {
   color: rgba(97,97,97,1);
-  transition: color 1.5s ease-out;
+  transition: color 0.2s;
 }
 @media (hover: hover) {
   .social-link:hover {
     color: rgba(180,180,180,1);
-    transition: color 0.2s;
   }
 }
-.social-link:active {
-  color: rgba(180,180,180,1);
-  transition: color 0s;
+@media (hover: none) {
+  .social-link {
+    transition: color 1.5s ease-out;
+  }
+  .social-link:active {
+    color: rgba(180,180,180,1);
+    transition: color 0s;
+  }
 }
