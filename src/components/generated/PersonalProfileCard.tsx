@@ -94,10 +94,10 @@ export const PersonalProfileCard = () => {
   const isMobile = viewportW < 768 && viewportW < viewportH;
   const [mobileSection, setMobileSection] = useState(0);
   const mobileSections = [
-    { cx: 720, cy: 450 }, // hero
-    { cx: 250, cy: 376 }, // about card
+    { cx: 720, cy: 512 }, // hero
+    { cx: 250, cy: 512 }, // about card
   ];
-  const mobileScale = viewportW / 600;
+  const mobileScale = viewportH / 1024;
   const gestureInProgress = React.useRef(false);
 
   useEffect(() => {
