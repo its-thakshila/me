@@ -4,35 +4,33 @@ import arrowLeft from '../../assets/arrow-left.svg';
 import arrowDown from '../../assets/arrow-down.svg';
 import profileImg from '../../assets/profile.png';
 
-const Card: React.FC<{
-  children: React.ReactNode;
-  style?: React.CSSProperties;
-  onClick?: () => void;
-  onHoverChange?: (hovered: boolean) => void;
-  isFocused?: boolean;
-  isMobile?: boolean;
-}> = ({ children, style, onClick, onHoverChange, isFocused, isMobile }) => (
-  <div
-    onClick={onClick}
-    className={`dashed-card${onClick ? ' dashed-card--clickable' : ''}${isFocused ? ' is-focused' : ''}`}
-    style={{
-      position: 'absolute',
-      pointerEvents: (isMobile && !isFocused) ? 'none' : 'auto',
-      zIndex: isFocused ? 100 : (style?.zIndex || 'auto'),
-      ...style,
-    }}
-    onMouseEnter={e => {
-      if (isMobile) return;
-      onHoverChange?.(true);
-    }}
-    onMouseLeave={e => {
-      if (isMobile) return;
-      onHoverChange?.(false);
-    }}
-  >
-    {children}
-  </div>
-);
+const Card = ({ children, isMobile, isFocused, onHoverChange, style, onClick }: { children: React.ReactNode; isMobile: boolean; isFocused: boolean; onHoverChange?: (hovered: boolean) => void; style?: React.CSSProperties; onClick?: () => void }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+  return (
+    <div
+      onClick={onClick}
+      className={`dashed-card${onClick ? ' dashed-card--clickable' : ''}${isFocused ? ' is-focused' : ''}${isHovered ? ' is-hovered' : ''}`}
+      style={{
+        position: 'absolute',
+        pointerEvents: (isMobile && !isFocused) ? 'none' : 'auto',
+        zIndex: (isFocused || isHovered) ? 100 : (style?.zIndex || 'auto'),
+        ...style,
+      }}
+      onMouseEnter={e => {
+        if (isMobile) return;
+        setIsHovered(true);
+        onHoverChange?.(true);
+      }}
+      onMouseLeave={e => {
+        if (isMobile) return;
+        setIsHovered(false);
+        onHoverChange?.(false);
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
 const Label = ({ children }: { children: React.ReactNode }) => (
   <span style={{ color: 'rgba(74,74,74,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 600, display: 'block', marginBottom: 5 }}>
