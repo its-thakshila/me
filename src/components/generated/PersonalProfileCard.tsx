@@ -338,7 +338,13 @@ export const PersonalProfileCard = () => {
         
         {/* ── Mobile Header ── */}
         {isMobile && (
-          <header style={{ position: 'absolute', left: 0, top: 24, width: '100%', height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100, pointerEvents: 'none' }}>
+          <header style={{ 
+            position: 'absolute', left: 0, top: 0, width: '100%', height: 90, 
+            display: 'flex', alignItems: 'flex-start', justifyContent: 'center', 
+            paddingTop: 14, boxSizing: 'border-box',
+            background: 'linear-gradient(to bottom, rgba(24,24,24,1) 0%, rgba(24,24,24,0.8) 45%, rgba(24,24,24,0) 100%)',
+            zIndex: 100, pointerEvents: 'none' 
+          }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <div style={{ width: 8, height: 8, backgroundColor: '#616161', borderRadius: '50%' }} />
               <span style={{ color: 'rgba(97,97,97,1)', fontSize: 13, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
