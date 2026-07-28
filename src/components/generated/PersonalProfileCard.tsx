@@ -9,10 +9,11 @@ const Card: React.FC<{
   style?: React.CSSProperties;
   onClick?: () => void;
   onHoverChange?: (hovered: boolean) => void;
-}> = ({ children, style, onClick, onHoverChange }) => (
+  isFocused?: boolean;
+}> = ({ children, style, onClick, onHoverChange, isFocused }) => (
   <div
     onClick={onClick}
-    className={`dashed-card${onClick ? ' dashed-card--clickable' : ''}`}
+    className={`dashed-card${onClick ? ' dashed-card--clickable' : ''}${isFocused ? ' is-focused' : ''}`}
     style={{
       backgroundColor: 'rgba(31,31,31,1)',
       boxShadow: '0px 4px 17.5px rgba(0,0,0,0.8)',
@@ -197,16 +198,16 @@ export const PersonalProfileCard = () => {
           <img src={profileImg} alt="Thakshila Bandara" style={{ width: 278, height: 278, position: 'absolute', left: 581, top: 400, objectFit: 'cover', borderRadius: 4 }} />
           <p style={{ width: 310, color: 'rgba(180,180,180,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: '29px', textAlign: 'center', position: 'absolute', left: 565, top: 680, whiteSpace: 'pre-line', margin: 0 }}>{'Embedded Systems Engineer\n& IoT Developer\nFounder @ Nodamic'}</p>
 
-          <Card onHoverChange={onCardHover} style={{ width: 367, height: 118, left: 171, top: 118, padding: '18px 21px', zIndex: 10 }}>
+          <Card isFocused={isMobile && activeSection.id === 'tagline'} onHoverChange={onCardHover} style={{ width: 367, height: 118, left: 171, top: 118, padding: '18px 21px', zIndex: 10 }}>
             <p className="sweep-text" style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }}>I enjoy turning ideas into practical products</p>
           </Card>
 
-          <Card onHoverChange={onCardHover} style={{ width: 358, height: 328, left: 71, top: 212, padding: '22px 21px' }}>
+          <Card isFocused={isMobile && activeSection.id === 'about'} onHoverChange={onCardHover} style={{ width: 358, height: 328, left: 71, top: 212, padding: '22px 21px' }}>
             <Label>About</Label>
             <p className="sweep-text" style={{ fontSize: 24, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }}>I design and build embedded systems and IoT solutions that connect hardware, software and real world impact.</p>
           </Card>
 
-          <Card onHoverChange={onCardHover} style={{ width: 320, height: 338, left: 111, top: 558, padding: '18px 21px' }}>
+          <Card isFocused={isMobile && activeSection.id === 'skills'} onHoverChange={onCardHover} style={{ width: 320, height: 338, left: 111, top: 558, padding: '18px 21px' }}>
             <Label>Skills</Label>
             <div className="card-skills">
               {[{ label: 'Embedded Systems', value: 'C/C++, Arduino, ESP32' }, { label: 'Protocols', value: 'CAN, MQTT, Wi-Fi, Bluetooth' }, { label: 'Tools and Platforms', value: 'PlatformIO, VS Code, Git' }, { label: 'Cloud and IoT', value: 'Firebase, Supabase' }].map((s, i) => (
@@ -218,7 +219,7 @@ export const PersonalProfileCard = () => {
             </div>
           </Card>
 
-          <Card onHoverChange={onCardHover} style={{ width: 389, height: 148, left: 919, top: 133, padding: '17px 21px' }}>
+          <Card isFocused={isMobile && activeSection.id === 'project1'} onHoverChange={onCardHover} style={{ width: 389, height: 148, left: 919, top: 133, padding: '17px 21px' }}>
             <Label>Project 1</Label>
             <div className="card-project">
               <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 21, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '32px', display: 'block' }}>Node 1 - Smart Power Socket</span>
@@ -226,7 +227,7 @@ export const PersonalProfileCard = () => {
             </div>
           </Card>
 
-          <Card onHoverChange={onCardHover} style={{ width: 389, height: 148, left: 981, top: 263, padding: '17px 21px' }}>
+          <Card isFocused={isMobile && activeSection.id === 'project2'} onHoverChange={onCardHover} style={{ width: 389, height: 148, left: 981, top: 263, padding: '17px 21px' }}>
             <Label>Project 2</Label>
             <div className="card-project">
               <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 21, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '32px', display: 'block' }}>Drivora - ADAS</span>
@@ -234,7 +235,7 @@ export const PersonalProfileCard = () => {
             </div>
           </Card>
 
-          <Card onHoverChange={onCardHover} style={{ width: 402, height: 148, left: 919, top: 413, padding: '17px 21px' }}>
+          <Card isFocused={isMobile && activeSection.id === 'project3'} onHoverChange={onCardHover} style={{ width: 402, height: 148, left: 919, top: 413, padding: '17px 21px' }}>
             <Label>Project 3</Label>
             <div className="card-project">
               <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 21, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '32px', display: 'block' }}>MPSoC JPEG Encoder Pipeline</span>
@@ -242,7 +243,7 @@ export const PersonalProfileCard = () => {
             </div>
           </Card>
 
-          <Card onHoverChange={onCardHover} style={{ width: 359, height: 286, left: 1000, top: 580, padding: '18px 21px' }}>
+          <Card isFocused={isMobile && activeSection.id === 'education'} onHoverChange={onCardHover} style={{ width: 359, height: 286, left: 1000, top: 580, padding: '18px 21px' }}>
             <Label>Education</Label>
             <div className="card-education">
               <div style={{ marginBottom: 18 }}>
@@ -258,7 +259,7 @@ export const PersonalProfileCard = () => {
             </div>
           </Card>
 
-          <Card onHoverChange={onCardHover} style={{ width: 389, height: 148, left: 331, top: 820, padding: '18px 21px' }}>
+          <Card isFocused={isMobile && activeSection.id === 'achievement'} onHoverChange={onCardHover} style={{ width: 389, height: 148, left: 331, top: 820, padding: '18px 21px' }}>
             <Label>Achievement</Label>
             <div className="card-achievement">
               <span className="sweep-text-bright" style={{ color: 'rgba(164,164,164,1)', fontSize: 22, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, display: 'block' }}>Champions - Game Fest 2026</span>
