@@ -203,9 +203,12 @@ export const PersonalProfileCard = () => {
           <div style={{ width: 1440, height: 1024, position: 'relative' }}>
 
             {(() => { 
+              const currentScale = isMobile ? activeScale : scale;
+              const ow = Math.max(2440, viewportW / currentScale + 1000); 
+              const oh = Math.max(2024, viewportH / currentScale + 1000); 
               return <div style={{ 
-                position: 'absolute', left: -4000, top: -4000, 
-                width: 10000, height: 10000, zIndex: 50, pointerEvents: 'none', 
+                position: 'absolute', left: -(ow-1440)/2, top: -(oh-1024)/2, 
+                width: ow, height: oh, zIndex: 50, pointerEvents: 'none', 
                 backgroundColor: isOverlayActive ? 'rgba(0,0,0,0.32)' : 'rgba(0,0,0,0)', 
                 backdropFilter: isOverlayActive ? 'blur(3px)' : 'blur(0px)', 
                 WebkitBackdropFilter: isOverlayActive ? 'blur(3px)' : 'blur(0px)', 
