@@ -11,7 +11,19 @@ const Card: React.FC<{
   onHoverChange?: (hovered: boolean) => void;
   isFocused?: boolean;
   isMobile?: boolean;
-}> = ({ children, style, onClick, onHoverChange, isFocused, isMobile }) => (
+}> = ({ children, style, onClick, onHoverChange, isFocused, isMobile }) => {
+  const [delayedZIndex, setDelayedZIndex] = useState(isFocused);
+  
+  useEffect(() => {
+    if (isFocused) {
+      setDelayedZIndex(true);
+    } else {
+      const timer = setTimeout(() => setDelayedZIndex(false), 600);
+      return () => clearTimeout(timer);
+    }
+  }, [isFocused]);
+
+  return (
   <div
     onClick={onClick}
     className={`dashed-card${onClick ? ' dashed-card--clickable' : ''}${isFocused ? ' is-focused' : ''}`}
@@ -20,11 +32,11 @@ const Card: React.FC<{
       boxShadow: '0px 4px 17.5px rgba(0,0,0,0.8)',
       borderRadius: '8px',
       boxSizing: 'border-box',
-      transition: isFocused ? 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), z-index 0s 0s' : 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), z-index 0s 0.6s',
+      transition: 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)',
       cursor: onClick ? 'pointer' : 'default',
       position: 'absolute',
       pointerEvents: (isMobile && !isFocused) ? 'none' : 'auto',
-      zIndex: isFocused ? 100 : (style?.zIndex || 'auto'),
+      zIndex: (isFocused || delayedZIndex) ? 100 : (style?.zIndex || 'auto'),
       ...style,
     }}
     onMouseEnter={e => {
@@ -50,7 +62,8 @@ const Card: React.FC<{
   >
     {children}
   </div>
-);
+  );
+};
 
 const Label = ({ children }: { children: React.ReactNode }) => (
   <span style={{ color: 'rgba(74,74,74,1)', fontSize: 20, fontFamily: '"Outfit",sans-serif', fontWeight: 600, display: 'block', marginBottom: 5 }}>
