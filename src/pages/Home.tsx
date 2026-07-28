@@ -133,14 +133,14 @@ export const Home = () => {
     } : {
       width: '100vw', height: '100vh', backgroundColor: 'rgba(24,24,24,1)', position: 'relative', overflow: 'hidden',
     }}>
-      
+
       {/* ── Main Transform Layer ── */}
       <div style={isMobile ? {
         position: 'absolute', inset: 0, overflow: 'hidden', touchAction: 'none',
       } : {
         position: 'absolute', inset: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1,
       }}>
-        
+
         {/* ── Grid Background ── */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)', WebkitMaskComposite: 'source-in', maskImage: 'linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)', maskComposite: 'intersect' } as React.CSSProperties}>
           <div style={isMobile ? {
@@ -162,9 +162,9 @@ export const Home = () => {
         } : {
           flexShrink: 0, transform: `scale(${scale})`, transformOrigin: 'center center',
         }}>
-          
+
           <div style={{ width: 1440, height: 1024, position: 'relative', transformStyle: 'preserve-3d' }}>
-            
+
             {/* ── Glassmorphic Blur Overlay ── */}
             {(() => {
               const currentScale = isMobile ? activeScale : scale;
@@ -197,9 +197,8 @@ export const Home = () => {
             <img src={profileImg} alt="Thakshila Bandara" style={{ width: 278, height: 278, position: 'absolute', left: 581, top: 400, objectFit: 'cover', borderRadius: 4 }} />
             <p style={{ width: 310, color: 'rgba(180,180,180,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: '29px', textAlign: 'center', position: 'absolute', left: 565, top: 680, whiteSpace: 'pre-line', margin: 0 }}>{'Embedded Systems Engineer\n& IoT Developer\nFounder @ Nodamic'}</p>
 
-            {/* ── Tagline Card ── */}
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'tagline'} onHoverChange={onCardHover} style={{ width: 367, height: 'max-content', left: 171, top: 118, padding: '18px 21px', zIndex: 10 }}>
-              <SweepText text="I enjoy turning ideas into practical products" style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }} />
+              <SweepText text="I enjoy turning creative ideas into practical, real-world products." style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }} />
             </Card>
 
             {/* ── About Card ── */}
@@ -293,29 +292,29 @@ export const Home = () => {
 
           </div>
         </div>
-        
+
         {/* ── Mobile UI Overlay ── */}
         {isMobile && (
           <>
-            <header style={{ 
-              position: 'absolute', left: 0, top: 0, width: '100%', height: 90, 
-              display: 'flex', alignItems: 'flex-start', justifyContent: 'center', 
+            <header style={{
+              position: 'absolute', left: 0, top: 0, width: '100%', height: 90,
+              display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
               paddingTop: 14, boxSizing: 'border-box',
               background: `linear-gradient(to bottom, ${isOverlayActive ? 'rgba(16,16,16,1)' : 'rgba(24,24,24,1)'} 0%, ${isOverlayActive ? 'rgba(16,16,16,0.85)' : 'rgba(24,24,24,0.85)'} 45%, ${isOverlayActive ? 'rgba(16,16,16,0)' : 'rgba(24,24,24,0)'} 100%)`,
-              zIndex: 100, pointerEvents: 'none' 
+              zIndex: 100, pointerEvents: 'none'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <div style={{ width: 8, height: 8, backgroundColor: '#616161', borderRadius: '50%' }} />
                 <span style={{ color: 'rgba(97,97,97,1)', fontSize: 13, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
               </div>
             </header>
-            
-            <footer style={{ 
-              position: 'absolute', left: 0, bottom: 0, width: '100%', height: 90, 
-              display: 'flex', alignItems: 'flex-end', justifyContent: 'center', 
+
+            <footer style={{
+              position: 'absolute', left: 0, bottom: 0, width: '100%', height: 90,
+              display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
               paddingBottom: 14, boxSizing: 'border-box',
               background: `linear-gradient(to top, ${isOverlayActive ? 'rgba(16,16,16,1)' : 'rgba(24,24,24,1)'} 0%, ${isOverlayActive ? 'rgba(16,16,16,0.85)' : 'rgba(24,24,24,0.85)'} 45%, ${isOverlayActive ? 'rgba(16,16,16,0)' : 'rgba(24,24,24,0)'} 100%)`,
-              zIndex: 100, pointerEvents: 'none' 
+              zIndex: 100, pointerEvents: 'none'
             }}>
               <span style={{ color: 'rgba(97,97,97,1)', fontSize: 13, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Open to Opportunities</span>
             </footer>
