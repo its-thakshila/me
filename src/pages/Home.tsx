@@ -183,7 +183,7 @@ export const Home = () => {
 
             {/* ── Desktop Header ── */}
             {!isMobile && (
-              <header style={{ position: 'absolute', left: 77, top: 59, width: 1286, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <header style={{ position: 'absolute', left: 71, top: 59, width: 1369, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <div style={{ width: 10, height: 10, backgroundColor: '#616161', borderRadius: '50%' }} />
                   <span style={{ color: 'rgba(97,97,97,1)', fontSize: 18, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
