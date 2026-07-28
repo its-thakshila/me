@@ -25,6 +25,8 @@ const Card: React.FC<{
       position: 'absolute',
       pointerEvents: (isMobile && !isFocused) ? 'none' : 'auto',
       zIndex: isFocused ? 100 : (style?.zIndex || 'auto'),
+      transform: 'translateZ(0px)',
+      willChange: 'transform, z-index',
       ...style,
     }}
     onMouseEnter={e => {
@@ -187,7 +189,7 @@ export const PersonalProfileCard = () => {
           flexShrink: 0, transform: `scale(${scale})`, transformOrigin: 'center center',
         }}>
           {/* Level 4: 1440×1024 canvas */}
-          <div style={{ width: 1440, height: 1024, position: 'relative' }}>
+          <div style={{ width: 1440, height: 1024, position: 'relative', transformStyle: 'preserve-3d' }}>
 
             {(() => { 
               const currentScale = isMobile ? activeScale : scale;
@@ -199,7 +201,8 @@ export const PersonalProfileCard = () => {
                 backgroundColor: isOverlayActive ? 'rgba(0,0,0,0.32)' : 'rgba(0,0,0,0)', 
                 backdropFilter: isOverlayActive ? 'blur(3px)' : 'blur(0px)', 
                 WebkitBackdropFilter: isOverlayActive ? 'blur(3px)' : 'blur(0px)', 
-                transition: 'background-color 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease' 
+                transition: 'background-color 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease',
+                transform: 'translateZ(50px)'
               } as React.CSSProperties} />; 
             })()}
 
