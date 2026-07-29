@@ -430,3 +430,12 @@ img.broken-image-fallback {
     transition: color 0s;
   }
 }
+
+@keyframes pulse-dot {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+.status-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}

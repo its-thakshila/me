@@ -202,7 +202,7 @@ export const Home = () => {
             {!isMobile && (
               <header style={{ position: 'absolute', left: 71, top: 59, width: 1360, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <div style={{ width: 10, height: 10, backgroundColor: '#616161', borderRadius: '50%' }} />
+                  <div className="status-dot" style={{ width: 10, height: 10, backgroundColor: '#616161', borderRadius: '50%' }} />
                   <span style={{ color: 'rgba(97,97,97,1)', fontSize: 18, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
                 </div>
                 <span style={{ color: 'rgba(97,97,97,1)', fontSize: 18, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Open to Opportunities</span>
@@ -322,7 +322,7 @@ export const Home = () => {
               zIndex: 100, pointerEvents: 'none'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ width: 8, height: 8, backgroundColor: '#616161', borderRadius: '50%' }} />
+                <div className="status-dot" style={{ width: 8, height: 8, backgroundColor: '#616161', borderRadius: '50%' }} />
                 <span style={{ color: 'rgba(97,97,97,1)', fontSize: 13, fontFamily: '"Outfit",sans-serif', textTransform: 'uppercase', letterSpacing: 1 }}>Online &nbsp;|&nbsp; Sri Lanka &nbsp;|&nbsp; {fmt(time)}</span>
               </div>
             </header>
