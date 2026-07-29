@@ -267,7 +267,26 @@ img.broken-image-fallback {
   display: inline;
 }
 
-.dashed-card.is-hovered .sweep-text, .dashed-card.is-focused .sweep-text {
+/* Multi-line variant for Tagline/About cards (diagonal sweep) */
+.sweep-text-multiline {
+  background: linear-gradient(
+    115deg,
+    #D9D9D9              0%,
+    #D9D9D9              33%,
+    rgba(111,111,111,1)  66%,
+    rgba(111,111,111,1) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: background-position 0.8s ease;
+  display: inline;
+}
+
+.dashed-card.is-hovered .sweep-text, .dashed-card.is-focused .sweep-text,
+.dashed-card.is-hovered .sweep-text-multiline, .dashed-card.is-focused .sweep-text-multiline {
   background-position: 0% 0;
 }
 

@@ -88,8 +88,8 @@ const Label = ({ children }: { children: React.ReactNode }) => (
   </span>
 );
 
-const SweepText = ({ text, bright, dim, style, className = '' }: { text: string; bright?: boolean; dim?: boolean; style?: React.CSSProperties; className?: string }) => (
-  <span className={`${bright ? 'sweep-text-bright' : dim ? 'sweep-text-dim' : 'sweep-text'} ${className}`} style={{ display: 'block', ...style }}>
+const SweepText = ({ text, bright, dim, multiline, style, className = '' }: { text: string; bright?: boolean; dim?: boolean; multiline?: boolean; style?: React.CSSProperties; className?: string }) => (
+  <span className={`${bright ? 'sweep-text-bright' : dim ? 'sweep-text-dim' : multiline ? 'sweep-text-multiline' : 'sweep-text'} ${className}`} style={{ display: 'block', ...style }}>
     {text}
   </span>
 );
@@ -214,14 +214,15 @@ export const Home = () => {
             <img src={profileImg} alt="Thakshila Bandara" style={{ width: 278, height: 278, position: 'absolute', left: 581, top: 400, objectFit: 'cover', borderRadius: 4 }} />
             <p style={{ width: 310, color: 'rgba(180,180,180,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: '29px', textAlign: 'center', position: 'absolute', left: 565, top: 680, whiteSpace: 'pre-line', margin: 0 }}>{'Embedded Systems Engineer\n& IoT Developer\nFounder @ Nodamic'}</p>
 
+            {/* ── Tagline Card ── */}
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'tagline'} onHoverChange={onCardHover} style={{ width: 367, height: 'max-content', left: 171, top: 118, padding: '18px 21px', zIndex: 10 }}>
-              <SweepText text="I enjoy turning creative ideas into practical, real-world products." style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }} />
+              <SweepText multiline text="I enjoy turning creative ideas into practical, real-world products." style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '40px', margin: 0 }} />
             </Card>
 
             {/* ── About Card ── */}
             <Card isMobile={isMobile} isFocused={isMobile && activeSection.id === 'about'} onHoverChange={onCardHover} style={{ width: 358, height: 'max-content', left: 71, top: 212, padding: '22px 21px' }}>
               <Label>About</Label>
-              <SweepText text="I design and build embedded systems and IoT solutions that connect hardware, software and real world impact." style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '42px', margin: 0 }} />
+              <SweepText multiline text="I design and build embedded systems and IoT solutions that connect hardware, software and real world impact." style={{ fontSize: 26, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '42px', margin: 0 }} />
             </Card>
 
             {/* ── Skills Card ── */}
