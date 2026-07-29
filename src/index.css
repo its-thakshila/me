@@ -271,13 +271,13 @@ img.broken-image-fallback {
   background-position: 0% 0;
 }
 
-/* Brighter variant for rgba(164,164,164) text → highlights to #EBEBEB,
+/* Brighter variant for rgba(164,164,164) text → highlights to #FFFFFF,
    keeping the visual hierarchy above the dimmer sweep-text (#D9D9D9) */
 .sweep-text-bright {
   background: linear-gradient(
     to right,
-    #EBEBEB              0%,
-    #EBEBEB              33%,
+    #FFFFFF              0%,
+    #FFFFFF              33%,
     rgba(164,164,164,1)  66%,
     rgba(164,164,164,1) 100%
   );

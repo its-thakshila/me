@@ -71,8 +71,8 @@ const Label = ({ children }: { children: React.ReactNode }) => (
   </span>
 );
 
-const SweepText = ({ text, bright, style, className = '' }: { text: string; bright?: boolean; style?: React.CSSProperties; className?: string }) => (
-  <span className={`${bright ? 'sweep-text-bright' : 'sweep-text'} ${className}`} style={{ display: 'block', ...style }}>
+const SweepText = ({ text, bright, dim, style, className = '' }: { text: string; bright?: boolean; dim?: boolean; style?: React.CSSProperties; className?: string }) => (
+  <span className={`${bright ? 'sweep-text-bright' : dim ? 'sweep-text-dim' : 'sweep-text'} ${className}`} style={{ display: 'block', ...style }}>
     {text}
   </span>
 );
@@ -226,7 +226,7 @@ export const Home = () => {
                 <Label>{`Project ${p.id.replace('project', '')}`}</Label>
                 <div className="card-project">
                   <SweepText bright text={p.title} style={{ color: 'rgba(164,164,164,1)', fontSize: 25, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '36px' }} />
-                  <SweepText text={p.desc} style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500, lineHeight: 1.3 }} />
+                  <SweepText dim text={p.desc} style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Outfit",sans-serif', fontWeight: 400, lineHeight: 1.4, marginTop: 8 }} />
                 </div>
               </Card>
             ))}
