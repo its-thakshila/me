@@ -39,6 +39,23 @@ const PROJECTS_DATA = [
 // ==========================================
 const Card = ({ children, isMobile, isFocused, onHoverChange, style, onClick }: { children: React.ReactNode; isMobile: boolean; isFocused: boolean; onHoverChange?: (hovered: boolean) => void; style?: React.CSSProperties; onClick?: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isElevated, setIsElevated] = useState(false);
+  const elevateTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (isHovered || isFocused) {
+      if (elevateTimer.current) clearTimeout(elevateTimer.current);
+      setIsElevated(true);
+    } else {
+      elevateTimer.current = setTimeout(() => {
+        setIsElevated(false);
+      }, 400); // Wait for blur overlay transition (350ms) to complete
+    }
+    return () => {
+      if (elevateTimer.current) clearTimeout(elevateTimer.current);
+    };
+  }, [isHovered, isFocused]);
+
   return (
     <div
       onClick={onClick}
@@ -46,7 +63,7 @@ const Card = ({ children, isMobile, isFocused, onHoverChange, style, onClick }: 
       style={{
         position: 'absolute',
         pointerEvents: (isMobile && !isFocused) ? 'none' : 'auto',
-        zIndex: (isFocused || isHovered) ? 100 : (style?.zIndex || 'auto'),
+        zIndex: (isFocused || isHovered || isElevated) ? 100 : (style?.zIndex || 'auto'),
         ...style,
       }}
       onMouseEnter={e => {
