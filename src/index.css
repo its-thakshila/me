@@ -271,6 +271,28 @@ img.broken-image-fallback {
   background-position: 0% 0;
 }
 
+/* Dimmer variant for rgba(111,111,111) text → highlights to #9F9F9F */
+.sweep-text-dim {
+  background: linear-gradient(
+    to right,
+    #9F9F9F              0%,
+    #9F9F9F              33%,
+    rgba(111,111,111,1)  66%,
+    rgba(111,111,111,1) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: background-position 0.8s ease;
+  display: inline;
+}
+
+.dashed-card.is-hovered .sweep-text-dim, .dashed-card.is-focused .sweep-text-dim {
+  background-position: 0% 0;
+}
+
 /* Brighter variant for rgba(164,164,164) text → highlights to #FFFFFF,
    keeping the visual hierarchy above the dimmer sweep-text (#D9D9D9) */
 .sweep-text-bright {
