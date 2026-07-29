@@ -213,7 +213,7 @@ export const Home = () => {
               <div className="card-skills">
                 {SKILLS_DATA.map((s, i) => (
                   <div key={i} style={{ marginTop: i === 0 ? 4 : 14 }}>
-                    <SweepText text={s.label} style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700 }} />
+                    <SweepText dim text={s.label} style={{ color: 'rgba(111,111,111,1)', fontSize: 17, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700 }} />
                     <SweepText bright text={s.value} style={{ color: 'rgba(164,164,164,1)', fontSize: 22, fontFamily: '"Outfit",sans-serif', fontWeight: 600 }} />
                   </div>
                 ))}
@@ -253,8 +253,8 @@ export const Home = () => {
               <Label>Achievement</Label>
               <div className="card-achievement">
                 <SweepText bright text="Champions - Game Fest 2026" style={{ color: 'rgba(164,164,164,1)', fontSize: 24, fontFamily: '"Libre Baskerville",serif', fontStyle: 'italic', fontWeight: 700, lineHeight: '34px' }} />
-                <SweepText text="8-Hour Game Dev Hackathon" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
-                <SweepText text="Organized by SLIIT Kandy Uni" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
+                <SweepText dim text="8-Hour Game Dev Hackathon" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
+                <SweepText dim text="Organized by SLIIT Kandy Uni" style={{ color: 'rgba(111,111,111,1)', fontSize: 19, fontFamily: '"Outfit",sans-serif', fontWeight: 500 }} />
               </div>
             </Card>
 
